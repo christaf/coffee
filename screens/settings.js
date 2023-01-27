@@ -3,7 +3,7 @@ import React, {useState} from 'react';
 import {View, Text, Button} from 'react-native';
 
 
-export default function SettingsScreen({navigation}) {
+function SettingsScreen({navigation}) {
 
     const [loggedIn, setLoggedIn] = useState(false);
 
@@ -20,3 +20,4 @@ export default function SettingsScreen({navigation}) {
         </View>
     );
 }
+export default SettingsScreen

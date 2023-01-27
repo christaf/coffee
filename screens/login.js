@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity } from 'react-native';
+import {View, Text, TextInput, TouchableOpacity, Button} from 'react-native';
+import styles from "../styles/login_style";
 
-const LoginScreen = () => {
+const LoginScreen = ({navigation}) => {
     const [loggedIn, setLoggedIn] = useState(false);
 
     const handleLogin = () => {
@@ -25,51 +26,14 @@ const LoginScreen = () => {
                     secureTextEntry={true}
                 />
             </View>
-            <TouchableOpacity style={styles.button} onPress={handleLogin}>
+            <Button style={styles.button} onPress={handleLogin} title={"Login"}>
                 <Text style={styles.buttonText}>Login</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.button}>
+            </Button>
+            <Button style={styles.button} onPress={() => {navigation.navigate('Register') }} title={"Register"}>
                 <Text style={styles.buttonText}>Register</Text>
-            </TouchableOpacity>
+            </Button>
         </View>
     );
-};
-
-const styles = {
-    container: {
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-    welcomeText: {
-        fontSize: 34,
-        marginBottom: 256,
-    },
-    formContainer: {
-        alignSelf: 'stretch',
-        paddingHorizontal: 24,
-    },
-    prompt: {
-        marginTop: 24,
-    },
-    input: {
-        height: 48,
-        borderWidth: 1,
-        borderColor: '#ccc',
-        paddingHorizontal: 8,
-        marginBottom: 36,
-    },
-    button: {
-        backgroundColor: '#4da6ff',
-        height: 48,
-        alignItems: 'center',
-        justifyContent: 'center',
-        marginTop: 24,
-    },
-    buttonText: {
-        color: '#fff',
-        fontWeight: 'bold',
-    },
 };
 
 export default LoginScreen;
