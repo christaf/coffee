@@ -6,6 +6,7 @@ const LoginScreen = ({navigation}) => {
 
     const handleLogin = () => {
         setLoggedIn(true);
+        navigation.navigate('Cart');
     }
 
     return (

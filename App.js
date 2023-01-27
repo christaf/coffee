@@ -24,10 +24,10 @@ export default function App() {
                 <Stack.Screen name="Login" component={LoginScreen}/>
                 <Stack.Screen name="Settings" component={SettingsScreen}/>
                 <Stack.Screen name="Register" component={RegisterScreen}/>
-
+                <Stack.Screen name="Cart" component={CartScreen}/>
+                <Stack.Screen name="CartView" component={CartScreen}/>
             </Stack.Navigator>
         </NavigationContainer>
     );
-    //<Stack.Screen name="Cart" component={CartScreen}/>
 }
 
