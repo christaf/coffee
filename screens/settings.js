@@ -1,12 +1,22 @@
-import React from 'react';
-import { View, Button } from 'react-native';
 import styles from "../styles/casual_style";
+import React, {useState} from 'react';
+import {View, Text, Button} from 'react-native';
 
-const SettingsScreen = () => {
+
+export default function SettingsScreen({navigation}) {
+
+    const [loggedIn, setLoggedIn] = useState(false);
+
     return (
         <View style={styles.container}>
-            <Button title="eee" />
+            <Text>Settings</Text>
+            <Button
+                title="Logout"
+                onPress={() => {
+                    setLoggedIn(false);
+                    navigation.navigate('Login');
+                }}
+            />
         </View>
     );
 }
-export default SettingsScreen;

@@ -9,6 +9,7 @@ import settings from "./screens/settings";
 const MainScreen = main;
 const LoginScreen = login;
 const SettingsScreen = settings;
+
 const Stack = createStackNavigator();
 
 export default function App() {

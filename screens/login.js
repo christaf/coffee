@@ -1,7 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity } from 'react-native';
 
 const LoginScreen = () => {
+    const [loggedIn, setLoggedIn] = useState(false);
+
+    const handleLogin = () => {
+        setLoggedIn(true);
+    }
+
     return (
         <View style={styles.container}>
             <Text style={styles.welcomeText}>Please login!</Text>
@@ -19,7 +25,7 @@ const LoginScreen = () => {
                     secureTextEntry={true}
                 />
             </View>
-            <TouchableOpacity style={styles.button}>
+            <TouchableOpacity style={styles.button} onPress={handleLogin}>
                 <Text style={styles.buttonText}>Login</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.button}>
