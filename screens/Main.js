@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, Button } from 'react-native';
 
-const MainScreen = ({navigation}) => {
+const OpeningScreen = ({navigation}) => {
     return (
         <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
             <Text>Herzlich Willkommen</Text>
@@ -11,4 +11,4 @@ const MainScreen = ({navigation}) => {
     );
 }
 
-export default MainScreen;
+export default OpeningScreen;
