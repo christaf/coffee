@@ -1,11 +1,10 @@
 import React from 'react';
-import {View, Text, Button} from 'react-native';
 import {createStackNavigator} from '@react-navigation/stack';
 import {NavigationContainer} from "@react-navigation/native";
 
-import main from "./Screens/main";
-import login from "./Screens/login";
-import settings from "./Screens/settings";
+import main from "./screens/main";
+import login from "./screens/login";
+import settings from "./screens/settings";
 
 const MainScreen = main;
 const LoginScreen = login;
@@ -24,10 +23,3 @@ export default function App() {
     );
 }
 
-// const styles = StyleSheet.create({
-//     container: {
-//         flex: 1,
-//         alignItems: 'center',
-//         justifyContent: 'center',
-//     },
-// });
