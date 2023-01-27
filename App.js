@@ -3,9 +3,11 @@ import {View, Text, Button} from 'react-native';
 import {createStackNavigator} from '@react-navigation/stack';
 import {NavigationContainer} from "@react-navigation/native";
 import main from "./Screens/main";
+import login from "./Screens/login";
 
 const Stack = createStackNavigator();
 const MainScreen = main;
+const LoginScreen = login;
 const HomeScreen = ({navigation}) => {
     return (
         <View style={{flex: 1, backgroundColor: '#0ff', alignItems: 'center', justifyContent: 'center'}}>
@@ -31,7 +33,7 @@ const App = () => {
         <NavigationContainer>
             <Stack.Navigator>
                 <Stack.Screen name="Main" component={MainScreen}/>
-                <Stack.Screen name="Details" component={MainScreen}/>
+                <Stack.Screen name="Login" component={LoginScreen}/>
             </Stack.Navigator>
         </NavigationContainer>
 
