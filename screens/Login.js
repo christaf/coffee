@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import {View, Text, TextInput, Button} from 'react-native';
 
 const LoginScreen = ({navigation}) => {
@@ -29,7 +29,9 @@ const LoginScreen = ({navigation}) => {
             <Button style={styles.button} onPress={handleLogin} title={"Login"}>
                 <Text style={styles.buttonText}>Login</Text>
             </Button>
-            <Button style={styles.button} onPress={() => {navigation.navigate('Register') }} title={"Register"}>
+            <Button style={styles.button} onPress={() => {
+                navigation.navigate('Register')
+            }} title={"Register"}>
                 <Text style={styles.buttonText}>Register</Text>
             </Button>
         </View>

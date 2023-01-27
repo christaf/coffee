@@ -19,6 +19,7 @@ function SettingsScreen({navigation}) {
         </View>
     );
 }
+
 const styles = StyleSheet.create({
     container: {
         flex: 1,

@@ -10,8 +10,8 @@ function RegisterScreen() {
         if (password !== passwordCheck) {
             alert("Passwords do not match");
         } else {
-            //ZAREJESTRUJ
-            //ZALOGUJ
+            //TODO register handler
+            //after registration automatically log in?
         }
     }
 
