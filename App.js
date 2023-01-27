@@ -2,10 +2,10 @@ import React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
 import {NavigationContainer} from "@react-navigation/native";
 
-import main from "./screens/main";
-import login from "./screens/login";
-import settings from "./screens/settings";
-import register from "./screens/register";
+import main from "./screens/Main";
+import login from "./screens/Login";
+import settings from "./screens/Settings";
+import register from "./screens/Register";
 
 const MainScreen = main;
 const LoginScreen = login;
