@@ -1,6 +1,6 @@
 import React from 'react';
 import {View, Text, Image} from 'react-native';
-import {styles} from "../styles";
+import {styles} from "../Styles/styles";
 import MyButton from "../Elements/MyButton";
 
 const MainScreen = ({navigation}) => {
