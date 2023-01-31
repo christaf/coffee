@@ -1,9 +1,17 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {View, Text, TextInput, Button} from 'react-native';
-
+import {doc, getDoc} from 'firebase/firestore';
+import {db} from '../config';
 const LoginScreen = ({navigation}) => {
     const [loggedIn, setLoggedIn] = useState(false);
 
+    useEffect(async () => {
+        const user = doc(db, 'users', 'eFkMWctnqZPSrEOx2wAu');
+        const docSNap = await getDoc(user);
+        if(docSNap.exists()){
+            console.log(docSNap.data());
+        }
+    })
     const handleLogin = () => {
         setLoggedIn(true);
         navigation.navigate('Cart');

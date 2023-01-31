@@ -21,7 +21,7 @@ function RegisterScreen() {
                 <Text style={{ fontSize: 28, fontWeight: 'bold', textAlign: 'center' }}>Rejestracja</Text>
                 <TextInput
                     style={{ width: 250, marginTop: 50, backgroundColor: 'white', elevation: 5, padding: 5, fontSize: 18 }}
-                    placeholder='Login:'
+                    placeholder='E-mail:'
                     onChangeText={(text) => setUsername(text)}
                     value={username}
                 />
