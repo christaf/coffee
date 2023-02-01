@@ -1,21 +1,52 @@
-import React, {useEffect, useState} from 'react';
-import {View, Text, TextInput, Button} from 'react-native';
-import {doc, getDoc} from 'firebase/firestore';
-import {db} from '../config';
-const LoginScreen = ({navigation}) => {
-    const [loggedIn, setLoggedIn] = useState(false);
+import React, { useEffect, useState } from 'react'
+import { View, Text, TextInput, Button } from 'react-native'
+import { db } from '../config'
+import { collection, query, where, getDocs } from 'firebase/firestore'
 
-    useEffect(async () => {
-        const user = doc(db, 'users', 'eFkMWctnqZPSrEOx2wAu');
-        const docSNap = await getDoc(user);
-        if(docSNap.exists()){
-            console.log(docSNap.data());
+const LoginScreen = ({ navigation }) => {
+    const [isLogged, setIsLogged] = useState(false)
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+    const [error, setError] = useState('')
+
+    const checkLogin = async () => {
+        try {
+            const q = query(
+                collection(db, 'users'),
+                where('password', '==', password),
+                where('email', '==', email)
+            )
+
+            const querySnapshot = await getDocs(q)
+
+            querySnapshot.forEach((doc) => {
+                setIsLogged(true)
+                console.log(doc.id, ' => ', doc.data())
+            })
+        } catch (err) {
+            console.log(err)
         }
-    })
-    const handleLogin = () => {
-        setLoggedIn(true);
-        navigation.navigate('Cart');
     }
+    //   useEffect(() => {
+    //     let isMounted = true
+
+    //     isMounted && getData()
+    //     return () => {
+    //       isMounted = false
+    //     }
+    //   }, [])
+
+    const handleLogin = () => {
+        checkLogin()
+    }
+
+    useEffect(() => {
+        isLogged
+            ? navigation.navigate('Cart')
+            : setError('Invalid email or password')
+    }, [isLogged])
+
+    console.log(error)
 
     return (
         <View style={styles.container}>
@@ -24,32 +55,41 @@ const LoginScreen = ({navigation}) => {
                 <Text style={styles.prompt}>Login:</Text>
                 <TextInput
                     style={styles.input}
-                    placeholder="Login"
-                    keyboardType="email-address"
+                    placeholder='Login'
+                    keyboardType='email-address'
+                    value={email}
+                    onChangeText={(oldEmail) => setEmail(oldEmail)}
                 />
                 <Text style={styles.prompt}>Password:</Text>
                 <TextInput
                     style={styles.input}
-                    placeholder="Password"
+                    placeholder='Password'
                     secureTextEntry={true}
+                    value={password}
+                    onChangeText={(oldPassword) => setPassword(oldPassword)}
                 />
             </View>
-            <Button style={styles.button} onPress={handleLogin} title={"Login"}>
+            <Button style={styles.button} onPress={handleLogin} title={'Login'}>
                 <Text style={styles.buttonText}>Login</Text>
             </Button>
-            <Button style={styles.button} onPress={() => {
-                navigation.navigate('Register')
-            }} title={"Register"}>
+            <Button
+                style={styles.button}
+                onPress={() => {
+                    navigation.navigate('Register')
+                }}
+                title={'Register'}
+            >
                 <Text style={styles.buttonText}>Register</Text>
             </Button>
+            {error && <Text style={styles.errorText}>{error}</Text>}
         </View>
-    );
-};
+    )
+}
 const styles = {
     login_container: {
         flex: 1,
         alignItems: 'center',
-        justifyContent: 'center'
+        justifyContent: 'center',
     },
     welcomeText: {
         fontSize: 34,
@@ -80,5 +120,9 @@ const styles = {
         color: '#fff',
         fontWeight: 'bold',
     },
-};
-export default LoginScreen;
+    errorText: {
+        textAlign: 'center',
+        color: 'red',
+    },
+}
+export default LoginScreen
