@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, Button, Image } from 'react-native';
 import { db } from '../config'
-import firebase from "firebase/compat";
+import firebase from 'firebase/firebase-auth';
 import { collection, query, where, getDocs } from 'firebase/firestore'
 
 function RegisterScreen() {
@@ -20,7 +20,7 @@ function RegisterScreen() {
                 if (!snapshot.empty) {
                     alert("This email is already in use");
                 } else {
-                // tu dymy    const userCredential = await firebase.auth().createUserWithEmailAndPassword(username, password);
+                    // tu dymy  const userCredential = await firebase.auth().createUserWithEmailAndPassword(username, password);
                  //   const user = userCredential.user;
                 //    await db.collection("users").doc(user.uid).set({ email: username });
                     //TODO redirect to login page
