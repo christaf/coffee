@@ -18,27 +18,28 @@ const LoginScreen = ({ navigation }) => {
             )
 
             const querySnapshot = await getDocs(q)
-
-            querySnapshot.forEach((doc) => {
-                setIsLogged(true)
-                console.log(doc.id, ' => ', doc.data())
-            })
+            return querySnapshot.size > 0;
+            // querySnapshot.forEach((doc) => {
+            //     setIsLogged(true)
+            //     console.log(doc.id, ' => ', doc.data())
+            // })
         } catch (err) {
             console.log(err)
+            return false;
         }
     }
-    //   useEffect(() => {
-    //     let isMounted = true
 
-    //     isMounted && getData()
-    //     return () => {
-    //       isMounted = false
-    //     }
-    //   }, [])
-
-    const handleLogin = () => {
-        checkLogin()
+    const handleLogin = async () => {
+        const isSuccessful = await checkLogin()
+        if (isSuccessful) {
+            setIsLogged(true)
+            navigation.navigate('Cart')
+        } else {
+            setError('Invalid email or password')
+        }
     }
+
+    //czym sie roznia te dwa
 
     useEffect(() => {
         isLogged
