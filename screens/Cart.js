@@ -9,11 +9,9 @@ const Cart = () => {
         //TODO jak to ma dzialac w ogole xD
     };
 
-    return (
-        <View>
+    return (<View>
             <Text>Menu</Text>
             <Button title="Checkout" onPress={checkout}/>
-        </View>
-    );
+        </View>);
 };
 export default Cart;

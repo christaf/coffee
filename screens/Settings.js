@@ -6,8 +6,7 @@ function SettingsScreen({navigation}) {
 
     const [loggedIn, setLoggedIn] = useState(false);
 
-    return (
-        <View style={styles.container}>
+    return (<View style={styles.container}>
             <Text>Settings</Text>
             <Button
                 title="Logout"
@@ -16,15 +15,12 @@ function SettingsScreen({navigation}) {
                     navigation.navigate('Login');
                 }}
             />
-        </View>
-    );
+        </View>);
 }
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center',
+        flex: 1, alignItems: 'center', justifyContent: 'center',
     },
 });
 export default SettingsScreen

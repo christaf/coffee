@@ -4,20 +4,16 @@ import {View, Text, FlatList} from 'react-native';
 function Favourites() {
     const [favorites, setFavorites] = useState([]);
 
-    return (
-        <View>
+    return (<View>
             <FlatList
                 data={favorites}
-                renderItem={({item}) => (
-                    <View>
+                renderItem={({item}) => (<View>
                         <Text>{item.name}</Text>
                         <Text>{item.price}</Text>
-                    </View>
-                )}
+                    </View>)}
                 keyExtractor={item => item.id}
             />
-        </View>
-    );
+        </View>);
 }
 
 export default Favourites;
