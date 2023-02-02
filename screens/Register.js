@@ -9,7 +9,7 @@ function RegisterScreen() {
     const [password, setPassword] = useState('');
     const [passwordCheck, setPasswordCheck] = useState('');
 
-    const handleRegister = async () => {
+    const handleRegister = async (navigation) => {
         if (password !== passwordCheck) {
             alert("Passwords do not match");
         } else {
@@ -23,7 +23,7 @@ function RegisterScreen() {
                     // tu dymy  const userCredential = await firebase.auth().createUserWithEmailAndPassword(username, password);
                     //   const user = userCredential.user;
                     //    await db.collection("users").doc(user.uid).set({ email: username });
-                    //TODO redirect to login page
+                    navigation.navigate('Login')
                 }
             } catch (error) {
                 console.error(error);
