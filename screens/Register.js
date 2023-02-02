@@ -1,17 +1,34 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, Button, Image } from 'react-native';
+import { db } from '../config'
+import firebase from "firebase/compat";
+import { collection, query, where, getDocs } from 'firebase/firestore'
 
 function RegisterScreen() {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [passwordCheck, setPasswordCheck] = useState('');
 
-    function handleRegister() {
+    const handleRegister = async () => {
         if (password !== passwordCheck) {
             alert("Passwords do not match");
         } else {
-            //TODO register handler
-            //after registration automatically log in?
+            try {
+                const userRef = db.collection("users").where("email", "==", username);
+                const snapshot = await userRef.get();
+
+                if (!snapshot.empty) {
+                    alert("This email is already in use");
+                } else {
+                // tu dymy    const userCredential = await firebase.auth().createUserWithEmailAndPassword(username, password);
+                 //   const user = userCredential.user;
+                //    await db.collection("users").doc(user.uid).set({ email: username });
+                    //TODO redirect to login page
+                }
+            } catch (error) {
+                console.error(error);
+                alert(error.message);
+            }
         }
     }
 

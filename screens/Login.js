@@ -42,9 +42,9 @@ const LoginScreen = ({ navigation }) => {
     //czym sie roznia te dwa
 
     useEffect(() => {
-        isLogged
-            ? navigation.navigate('Cart')
-            : setError('Invalid email or password')
+        // isLogged
+        //     ? navigation.navigate('Cart')
+        //     : setError('Invalid email or password')
     }, [isLogged])
 
     console.log(error)
