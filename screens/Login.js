@@ -73,7 +73,7 @@ const LoginScreen = ({navigation}) => {
         <Button
             style={styles.button}
             onPress={() => {
-                navigation.navigate('Register')
+                navigation.navigate('SignUpScreen')
             }}
             title={'Register'}
         >

@@ -8,6 +8,7 @@ import settings from "./screens/Settings";
 import register from "./screens/Register";
 import cart from "./screens/Cart";
 import favourite from "./screens/Favourite";
+import SignupScreen from "./screens/SignUpScreen";
 
 const OpeningScreen = opening;
 const LoginScreen = login;
@@ -28,6 +29,7 @@ export default function App() {
                 <Stack.Screen name="Register" component={RegisterScreen}/>
                 <Stack.Screen name="Cart" component={CartScreen}/>
                 <Stack.Screen name="Favourite" component={FavouriteScreen}/>
+                <Stack.Screen name="SignUpScreen" component={SignupScreen}/>
             </Stack.Navigator>
         </NavigationContainer>
     );
