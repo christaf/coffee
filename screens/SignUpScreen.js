@@ -1,15 +1,17 @@
-import React, { useState } from 'react';
-import { View, TextInput, Button } from 'react-native';
-import firebase from "firebase/compat";
+import React, {useState} from 'react';
+import {View, TextInput, Button} from 'react-native';
 import {db} from "../firebase";
-
+import * as authLib from "firebase/auth";
 export default function SignupScreen() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
     const handleSignup = () => {
-        db.auth.createUserWithEmailAndPassword(email, password)
-            .then(() => {
+        const auth = authLib.getAuth();
+        console.log(auth);
+        authLib.createUserWithEmailAndPassword(auth,email, password)
+            .then((userCredential) => {
+                console.log(userCredential);
                 console.log('User account created successfully');
             })
             .catch((error) => {

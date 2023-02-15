@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@react-native-community/masked-view": "^0.1.11",
+    "@react-native-firebase/auth": "^17.2.0",
     "@react-navigation/native": "^6.1.2",
     "@react-navigation/native-stack": "^6.9.8",
     "@react-navigation/stack": "^6.3.11",
@@ -29,5 +30,16 @@
     "@babel/core": "^7.12.9",
     "assets": "^3.0.1"
   },
-  "private": true
+  "private": true,
+  "description": "Aplikacje mobilne projekt - kafejka",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/christaf/coffee.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/christaf/coffee/issues"
+  },
+  "homepage": "https://github.com/christaf/coffee#readme"
 }
