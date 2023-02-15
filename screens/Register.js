@@ -1,3 +1,6 @@
+import React, {useState} from 'react';
+import {View, Text, TextInput, Image} from 'react-native';
+import {db} from '../config'
 import React, { useState } from 'react';
 import { View, Text, TextInput, Image } from 'react-native';
 import {registerStyles} from "../Styles/RegisterStyles";
@@ -6,6 +9,9 @@ import MyButton from "../Elements/MyButton";
 import React, {useState} from 'react';
 import {View, Text, TextInput, Button, Image} from 'react-native';
 import {db} from '../config'
+
+//import firebase from 'firebase/firebase-auth';
+import {collection, query, where, getDocs} from 'firebase/firestore'
 
 function RegisterScreen() {
     const [username, setUsername] = useState('');
@@ -63,7 +69,7 @@ function RegisterScreen() {
                     Zarejestruj
                 </MyButton>
             </View>
-            <Image source={require('../images/background_img.jpg')} style={registerStyles.registerImage} />
+            <Image source={require('../images/background_img.jpg')} style={registerStyles.registerImage}/>
         </View>
     );
 }

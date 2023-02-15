@@ -1,17 +1,19 @@
 import React from 'react';
-import {View, Text, Button} from 'react-native';
-
+import {View, Text, Image} from 'react-native';
+import {styles} from "../Styles/styles";
+import MyButton from "../Elements/MyButton";
 
 const OpeningScreen = ({navigation}) => {
-    return (<View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-        <Text>Herzlich Willkommen</Text>
-        <Button title="TO SETTINGS" onPress={() => {
-            navigation.navigate('Settings')
-        }} style={{position: 'absolute', right: 0}}/>
-        <Button title="Start" onPress={() => {
-            navigation.navigate('Login')
-        }}/>
-    </View>);
+    return(
+        <View style={styles.welcomeScreen}>
+            <Text style={styles.welcomeText}>Witamy w Kawiarni Kim-Chi!</Text>
+
+            <Image source={require('../images/welcome_img.jpg')} style={styles.welcomeImage}/>
+
+            <MyButton onPress={() => {navigation.navigate('Login')}} style={styles.helloButton}> START </MyButton>
+            <MyButton onPress={() => {navigation.navigate('Settings')}} style={styles.button}> TO SETTINGS </MyButton>
+        </View>
+    );
 }
 
 export default OpeningScreen;
