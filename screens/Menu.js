@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, Image, StyleSheet, FlatList, TouchableOpacity } from 'react-native';
 import 'firebase/firestore';
-import {db} from '../config'
+import {db} from '../firebase'
 
 export default function MenuScreen() {
     const [coffees, setCoffees] = useState([]);

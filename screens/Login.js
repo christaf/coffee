@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react'
 import {View, Text, TextInput, Button} from 'react-native'
-import {db} from '../config'
+import {db} from '../firebase'
 import {collection, query, where, getDocs} from 'firebase/firestore'
 
 const LoginScreen = ({navigation}) => {
@@ -17,10 +17,7 @@ const LoginScreen = ({navigation}) => {
 
             const querySnapshot = await getDocs(q)
             return querySnapshot.size > 0;
-            // querySnapshot.forEach((doc) => {
-            //     setIsLogged(true)
-            //     console.log(doc.id, ' => ', doc.data())
-            // })
+
         } catch (err) {
             console.log(err)
             return false;
@@ -36,16 +33,6 @@ const LoginScreen = ({navigation}) => {
             setError('Invalid email or password')
         }
     }
-
-    //czym sie roznia te dwa
-
-    useEffect(() => {
-        // isLogged
-        //     ? navigation.navigate('Cart')
-        //     : setError('Invalid email or password')
-    }, [isLogged])
-
-    console.log(error)
 
     return (<View style={styles.container}>
         <Text style={styles.welcomeText}>Please login!</Text>

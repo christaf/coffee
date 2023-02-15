@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {View, Text, TextInput, Button, Image} from 'react-native';
-import {db} from '../config'
+import {db} from '../firebase'
 import {collection, query, where, getDocs} from 'firebase/firestore'
 
 function RegisterScreen() {
