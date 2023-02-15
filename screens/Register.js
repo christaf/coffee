@@ -42,7 +42,7 @@ function RegisterScreen() {
                 <Text style={styles.welcomeText}>Rejestracja</Text>
                 <TextInput
                     style={registerStyles.textInput}
-                    placeholder='Login:'
+                    placeholder='E-mail:'
                     onChangeText={(text) => setUsername(text)}
                     value={username}
                 />
