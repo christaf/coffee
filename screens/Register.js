@@ -1,13 +1,12 @@
 import React, {useState} from 'react';
-import {View, Text, TextInput, Button, Image} from 'react-native';
+import {View, Text, TextInput, Image} from 'react-native';
 import {db} from '../config'
-import firebase from 'firebase/firebase-auth';
-import {collection, query, where, getDocs} from 'firebase/firestore'
-import React, { useState } from 'react';
-import { View, Text, TextInput, Image } from 'react-native';
 import {registerStyles} from "../Styles/RegisterStyles";
 import {styles} from "../Styles/styles";
 import MyButton from "../Elements/MyButton";
+
+//import firebase from 'firebase/firebase-auth';
+import {collection, query, where, getDocs} from 'firebase/firestore'
 
 function RegisterScreen() {
     const [username, setUsername] = useState('');
@@ -37,27 +36,17 @@ function RegisterScreen() {
         }
     }
 
-    return (<View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-            <View style={{width: 320, padding: 30}}>
-                <Text style={{fontSize: 28, fontWeight: 'bold', textAlign: 'center'}}>Rejestracja</Text>
     return (
         <View style={styles.welcomeScreen}>
             <View style={registerStyles.registerScreenBox}>
                 <Text style={styles.welcomeText}>Rejestracja</Text>
                 <TextInput
-                    style={{
-                        width: 250, marginTop: 50, backgroundColor: 'white', elevation: 5, padding: 5, fontSize: 18
-                    }}
-                    placeholder='E-mail:'
                     style={registerStyles.textInput}
-                    placeholder='Login:'
+                    placeholder='E-mail:'
                     onChangeText={(text) => setUsername(text)}
                     value={username}
                 />
                 <TextInput
-                    style={{
-                        width: 250, marginTop: 20, backgroundColor: 'white', elevation: 5, padding: 5, fontSize: 18
-                    }}
                     style={registerStyles.textInput}
                     placeholder='Hasło:'
                     secureTextEntry={true}
@@ -65,27 +54,17 @@ function RegisterScreen() {
                     value={password}
                 />
                 <TextInput
-                    style={{
-                        width: 250, marginTop: 20, backgroundColor: 'white', elevation: 5, padding: 5, fontSize: 18
-                    }}
                     style={registerStyles.textInput}
                     placeholder='Powtórz hasło:'
                     secureTextEntry={true}
                     onChangeText={(text) => setPasswordCheck(text)}
                     value={passwordCheck}
                 />
-                <Button
-                    title="Zarejestruj"
-                    style={{width: 250, marginTop: 20, backgroundColor: '#0084ff', elevation: 5, fontSize: 18}}
-                    onPress={handleRegister}
-                />
                 <MyButton onPress={() => {handleRegister}} style={styles.button}>
                     Zarejestruj
                 </MyButton>
             </View>
-            <Image source={require('../images/background_img.jpg')} style={{width: '50%', height: '30%'}}/>
-        </View>);
-            <Image source={require('../images/background_img.jpg')} style={registerStyles.registerImage} />
+            <Image source={require('../images/background_img.jpg')} style={registerStyles.registerImage}/>
         </View>
     );
 }

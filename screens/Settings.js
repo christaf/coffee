@@ -15,7 +15,8 @@ function SettingsScreen({navigation}) {
                     navigation.navigate('Login');
                 }}
             />
-        </View>);
+        </View>
+    );
 }
 
 const styles = StyleSheet.create({
