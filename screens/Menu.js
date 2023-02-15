@@ -40,7 +40,7 @@ export default function MenuScreen() {
                     <Text style={styles.coffeeName}>{item.name}</Text>
                     <Text style={styles.coffeePrice}>${item.price.toFixed(2)}</Text>
                     <View style={styles.coffeeActions}>
-                        <TouchableOpacity onPress={() => handleAddToCa5rt(item.id)} style={styles.actionButton}>
+                        <TouchableOpacity onPress={() => handleAddToCart(item.id)} style={styles.actionButton}>
                             <Text style={styles.actionButtonText}>Add to cart</Text>
                         </TouchableOpacity>
                         <TouchableOpacity onPress={() => handleAddToFavorites(item.id)} style={styles.actionButton}>
