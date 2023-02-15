@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react'
 import {View, Text, TextInput, Button} from 'react-native'
 import {db} from '../firebase'
 import {collection, query, where, getDocs} from 'firebase/firestore'
+import * as authLib from "firebase/auth";
 
 const LoginScreen = ({navigation}) => {
     const [isLogged, setIsLogged] = useState(false)
@@ -9,19 +10,17 @@ const LoginScreen = ({navigation}) => {
     const [password, setPassword] = useState('')
     const [error, setError] = useState('')
 
-    const checkLogin = async () => {
-        try {
-            const q = query(collection(db, 'users'),
-                where('password', '==', password),
-                where('email', '==', email))
-
-            const querySnapshot = await getDocs(q)
-            return querySnapshot.size > 0;
-
-        } catch (err) {
-            console.log(err)
-            return false;
-        }
+    const checkLogin = async (navigation) => {
+        const auth = authLib.getAuth(db.app);
+        authLib.signInWithEmailAndPassword(auth, email, password)
+            .then(() => {
+                navigation.navigate("Menu")
+                return true;
+            })
+            .catch((error) => {
+                console.log(error);
+                return false;
+            })
     }
 
     const handleLogin = async () => {
