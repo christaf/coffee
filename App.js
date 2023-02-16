@@ -10,6 +10,7 @@ import cart from "./screens/Cart";
 import favourite from "./screens/Favourite";
 import SignupScreen from "./screens/SignUpScreen";
 import ProductMenu from "./screens/ProductMenu";
+import mainTab from "./screens/MainTab";
 
 const OpeningScreen = opening;
 const LoginScreen = login;
@@ -17,6 +18,7 @@ const SettingsScreen = settings;
 const RegisterScreen = register;
 const CartScreen = cart;
 const FavouriteScreen = favourite;
+const MainTab = mainTab;
 
 const Stack = createStackNavigator();
 
@@ -32,6 +34,7 @@ export default function App() {
                 <Stack.Screen name="Favourite" component={FavouriteScreen}/>
                 <Stack.Screen name="SignUpScreen" component={SignupScreen}/>
                 <Stack.Screen name="ProductMenu" component={ProductMenu}/>
+                <Stack.Screen name="MainTab" component={MainTab}/>
             </Stack.Navigator>
         </NavigationContainer>
     );

@@ -12,8 +12,7 @@ const OrderItem = ({title, description}) => (
             title = {title}
             description = {description}
             left={props =>
-                <View style={{ justifyContent: 'center',
-                    alignItems: 'center' }}>
+                <View style={{ justifyContent: 'center', alignItems: 'center' }}>
                     <Avatar.Image size={64} source=
                         {{
                             uri:('https://images.pexels.com/photos/302896/pexels-photo-302896.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2')
@@ -26,7 +25,7 @@ const OrderItem = ({title, description}) => (
                             buttonColor={'#213769'}
                             icon="md-checkmark-circle"
                             mode="contained"
-                            onPress={() => alert("Are you sure you want to delete?")}>
+                            onPress={() => console.log('Deleted')}>
                         Delete Item
                     </Button>
                     <Button style={{ marginTop: 5 }}
@@ -34,8 +33,8 @@ const OrderItem = ({title, description}) => (
                             buttonColor={'#213769'}
                             icon="play-arrow"
                             mode="contained"
-                            onPress={() => console.log('Pressed')}>
-                        Play
+                            onPress={() => alert("Move to customisation")}>
+                        Customize
                     </Button>
                 </View>
             }

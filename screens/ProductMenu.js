@@ -2,6 +2,10 @@ import {FlatList, View} from "react-native";
 import OrderItem from "../Elements/OrderItem";
 import {useNavigation} from "@react-navigation/native";
 import {ProductStyles} from "../Styles/ProductStyles";
+import {Button} from "react-native-paper";
+import React from "react";
+
+
 const ProductMenu = () => {
 
     const navigation = useNavigation();
@@ -30,6 +34,14 @@ const ProductMenu = () => {
                     </View>
                 }
             />
+            <View style={{ padding: 10 }}>
+                <Button style={{ marginTop: 5}}
+                        buttonColor={'#213769'}
+                        mode="contained"
+                        onPress={() => console.log('Deleted')}>
+                    Checkout
+                </Button>
+            </View>
         </View>
     );
 }

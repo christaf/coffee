@@ -38,7 +38,7 @@ const LoginScreen = ({navigation}) => {
         if (isSuccessful) {
             setIsLogged(true)
             //navigation.navigate('Cart')
-            navigation.navigate('ProductMenu')
+            navigation.navigate('MainTab')
         } else {
             setError('Invalid email or password')
         }
