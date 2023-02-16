@@ -1,9 +1,9 @@
 import React from 'react';
 import {useNavigation} from '@react-navigation/native';
 import { View, FlatList } from 'react-native';
-import OrderItem from "../Elements/OrderItem";
-import {styles} from "../Styles/styles";
-import MyButton from "../Elements/MyButton";
+import OrderItem from "../../Elements/OrderItem";
+import {styles} from "../../Styles/styles";
+import MyButton from "../../Elements/MyButton";
 
 
 

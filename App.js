@@ -4,12 +4,12 @@ import {NavigationContainer} from "@react-navigation/native";
 
 import opening from "./screens/Opening";
 import login from "./screens/Login";
-import settings from "./screens/Settings";
+import settings from "./screens/MainTab/Settings";
 import register from "./screens/Register";
-import cart from "./screens/Cart";
-import favourite from "./screens/Favourite";
+import cart from "./screens/MainTab/Cart";
+import favourite from "./screens/MainTab/Favourite";
 import SignupScreen from "./screens/SignUpScreen";
-import ProductMenu from "./screens/ProductMenu";
+import ProductMenu from "./screens/MainTab/ProductMenu";
 import mainTab from "./screens/MainTab";
 
 const OpeningScreen = opening;

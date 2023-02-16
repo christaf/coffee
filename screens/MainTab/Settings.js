@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {StyleSheet, View, Text} from 'react-native';
-import {styles} from "../Styles/styles";
+import {styles} from "../../Styles/styles";
 import {Button} from "react-native-paper";
 
 
