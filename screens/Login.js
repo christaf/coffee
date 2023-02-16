@@ -1,4 +1,5 @@
 import MyButton from "../Elements/MyButton";
+import {Button} from "react-native-paper";
 import {loginStyles} from "../Styles/LoginStyles";
 import {styles} from "../Styles/styles";
 import React, {useEffect, useState} from 'react'
@@ -37,9 +38,9 @@ const LoginScreen = ({navigation}) => {
         const isSuccessful = await checkLogin()
         if (isSuccessful) {
             setIsLogged(true)
-            //navigation.navigate('Cart')
             navigation.navigate('MainTab')
         } else {
+            alert("Invalid email or password")
             setError('Invalid email or password')
         }
     }

@@ -2,11 +2,9 @@ import {Pressable, StyleSheet, Text, View} from "react-native";
 import {Avatar, Button, List} from "react-native-paper";
 import React from "react";
 import {styles} from "../Styles/styles";
-import {Ionicons as Icon} from '@expo/vector-icons';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 
-const OrderItem = ({title, description}) => (
+const InCartItem = ({title, description}) => (
     <View>
         <List.Item
             title = {title}
@@ -23,7 +21,7 @@ const OrderItem = ({title, description}) => (
                 <View>
                     <Button style={{ marginTop: 5}}
                             buttonColor={'#213769'}
-                            icon="md-checkmark-circle"
+                            icon="alpha-x-circle-outline"
                             mode="contained"
                             onPress={() => console.log('Deleted')}>
                         Delete Item
@@ -31,7 +29,7 @@ const OrderItem = ({title, description}) => (
                     <Button style={{ marginTop: 5 }}
                             dark={true}
                             buttonColor={'#213769'}
-                            icon="play-arrow"
+                            icon="apple"
                             mode="contained"
                             onPress={() => alert("Move to customisation")}>
                         Customize
@@ -86,4 +84,4 @@ const styles = StyleSheet.create({
 
  */
 
-export default OrderItem;
+export default InCartItem;

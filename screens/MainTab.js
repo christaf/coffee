@@ -18,7 +18,7 @@ const MainTab = () => {
 
     return (
         <Tab.Navigator>
-            <Tab.Screen name="Menu" component={ProductMenu} />
+            <Tab.Screen name="Menu" component={ProductMenu}/>
             <Tab.Screen name="Favourites" component={FavouriteScreen} />
             <Tab.Screen name="Map" component={RestaurantMap} />
             <Tab.Screen name="Cart" component={Cart} />

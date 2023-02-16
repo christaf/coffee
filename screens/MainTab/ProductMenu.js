@@ -1,5 +1,5 @@
 import {FlatList, View} from "react-native";
-import OrderItem from "../../Elements/OrderItem";
+import OrderableItem from "../../Elements/OrderableItem";
 import {useNavigation} from "@react-navigation/native";
 import {ProductStyles} from "../../Styles/ProductStyles";
 import {Button} from "react-native-paper";
@@ -23,14 +23,7 @@ const ProductMenu = () => {
                 data={getItems(5)}
                 renderItem={({ item }) =>
                     <View style={ProductStyles.item}>
-                        <OrderItem title={'CAFF'} description={'som descr'}></OrderItem>
-                    </View>
-                }
-
-                data={getItems(5)}
-                renderItem={({ item }) =>
-                    <View style={ProductStyles.item}>
-                        <OrderItem title={'CAFF2'} description={'som descrere'}></OrderItem>
+                        <OrderableItem title={'CAFFE'} description={'Order plox'}></OrderableItem>
                     </View>
                 }
             />
