@@ -1,6 +1,11 @@
 import {StyleSheet} from "react-native";
 
 export const styles = StyleSheet.create({
+    defaultScreen:{
+        backgroundColor: 'grey',
+        flex: 5,
+        paddingLeft: 30
+    },
     welcomeScreen:{
         backgroundColor: 'grey',
         flex: 1,

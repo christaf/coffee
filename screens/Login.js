@@ -14,7 +14,9 @@ const LoginScreen = ({navigation}) => {
 
     const checkLogin = async () => {
         try {
+            //Do testów pomija login
             return true;
+
             const q = query(collection(db, 'users'),
                 where('password', '==', password),
                 where('email', '==', email))
@@ -35,7 +37,8 @@ const LoginScreen = ({navigation}) => {
         const isSuccessful = await checkLogin()
         if (isSuccessful) {
             setIsLogged(true)
-            navigation.navigate('Cart')
+            //navigation.navigate('Cart')
+            navigation.navigate('ProductMenu')
         } else {
             setError('Invalid email or password')
         }

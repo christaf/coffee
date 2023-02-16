@@ -1,6 +1,9 @@
 import {Pressable, StyleSheet, Text, View} from "react-native";
 import {Avatar, Button, List} from "react-native-paper";
 import React from "react";
+import {styles} from "../Styles/styles";
+import {Ionicons as Icon} from '@expo/vector-icons';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 
 const OrderItem = ({title, description}) => (
@@ -13,23 +16,24 @@ const OrderItem = ({title, description}) => (
                     alignItems: 'center' }}>
                     <Avatar.Image size={64} source=
                         {{
-                            uri:('https://quranicquizzes.com/Content/QuizImages/wuhoxos2.e12.png')
+                            uri:('https://images.pexels.com/photos/302896/pexels-photo-302896.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2')
                         }} />
                 </View>
             }
             right={props =>
                 <View>
-                    <Button style={{ marginbottom: 5 }}
-                            color="#1d4b86"
-                            icon="library-books"
+                    <Button style={{ marginTop: 5}}
+                            buttonColor={'#213769'}
+                            icon="md-checkmark-circle"
                             mode="contained"
                             onPress={() => alert("Are you sure you want to delete?")}>
                         Delete Item
                     </Button>
                     <Button style={{ marginTop: 5 }}
                             dark={true}
-                            color="#f37737"
-                            icon="play-arrow" mode="contained"
+                            buttonColor={'#213769'}
+                            icon="play-arrow"
+                            mode="contained"
                             onPress={() => console.log('Pressed')}>
                         Play
                     </Button>
@@ -38,6 +42,7 @@ const OrderItem = ({title, description}) => (
         />
     </View>
 );
+/*
 const styles = StyleSheet.create({
     quizAttrContent:{
         flexDirection: 'row',
@@ -79,5 +84,7 @@ const styles = StyleSheet.create({
         marginRight: 5
     }
 });
+
+ */
 
 export default OrderItem;
