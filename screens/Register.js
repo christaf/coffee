@@ -6,7 +6,7 @@ import MyButton from "../Elements/MyButton";
 import {db} from '../config'
 
 //import firebase from 'firebase/firebase-auth';
-import {collection, query, where, getDocs} from 'firebase/firestore'
+//import {collection, query, where, getDocs} from 'firebase/firestore'
 
 function RegisterScreen() {
     const [username, setUsername] = useState('');

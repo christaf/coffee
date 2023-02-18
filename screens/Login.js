@@ -1,11 +1,9 @@
 import MyButton from "../Elements/MyButton";
-import {Button} from "react-native-paper";
 import {loginStyles} from "../Styles/LoginStyles";
 import {styles} from "../Styles/styles";
 import React, {useEffect, useState} from 'react'
 import {View, Text, TextInput} from 'react-native'
-import {db} from '../config'
-import {collection, query, where, getDocs} from 'firebase/firestore'
+import firebase from "firebase/compat";
 
 const LoginScreen = ({navigation}) => {
     const [isLogged, setIsLogged] = useState(false)
@@ -15,19 +13,14 @@ const LoginScreen = ({navigation}) => {
 
     const checkLogin = async () => {
         try {
-            //Do testów pomija login
-            return true;
 
-            const q = query(collection(db, 'users'),
-                where('password', '==', password),
-                where('email', '==', email))
-
-            const querySnapshot = await getDocs(q)
-            return querySnapshot.size > 0;
-            // querySnapshot.forEach((doc) => {
-            //     setIsLogged(true)
-            //     console.log(doc.id, ' => ', doc.data())
-            // })
+            firebase.auth().signInWithEmailAndPassword(email, password).then(() => {
+                    console.log("LOGGED IN");
+                    return true;
+                }
+            ).catch((error) =>
+                console.log(error.msg)
+            );
         } catch (err) {
             console.log(err)
             return false;
@@ -38,22 +31,13 @@ const LoginScreen = ({navigation}) => {
         const isSuccessful = await checkLogin()
         if (isSuccessful) {
             setIsLogged(true)
-            navigation.navigate('MainTab')
+            console.log("DUPAr")
+            navigation.replace('MainTab')
         } else {
             alert("Invalid email or password")
             setError('Invalid email or password')
         }
     }
-
-    //czym sie roznia te dwa
-
-    useEffect(() => {
-        // isLogged
-        //     ? navigation.navigate('Cart')
-        //     : setError('Invalid email or password')
-    }, [isLogged])
-
-    console.log(error)
 
     return (
         <View style={loginStyles.login_container}>
