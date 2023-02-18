@@ -3,7 +3,7 @@ import {loginStyles} from "../Styles/LoginStyles";
 import {styles} from "../Styles/styles";
 import React, {useEffect, useState} from 'react'
 import {View, Text, TextInput} from 'react-native'
-import firebase from "firebase/compat";
+import * as authLib from "firebase/auth";
 
 const LoginScreen = ({navigation}) => {
     const [isLogged, setIsLogged] = useState(false)
