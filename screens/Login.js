@@ -31,6 +31,7 @@ const LoginScreen = ({navigation}) => {
             setIsLogged(true)
             navigation.navigate('Cart')
         } else {
+            console.log(error.msg)
             setError('Invalid email or password')
         }
     }
@@ -59,7 +60,7 @@ const LoginScreen = ({navigation}) => {
             </MyButton>
 
             <MyButton onPress={() => {
-                navigation.navigate('Register')
+                navigation.navigate('SignUpScreen')
             }} style={styles.button}>
                 <Text style={loginStyles.buttonText}>Register</Text>
             </MyButton>
