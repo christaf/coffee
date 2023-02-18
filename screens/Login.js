@@ -1,9 +1,10 @@
 import MyButton from "../Elements/MyButton";
 import {loginStyles} from "../Styles/LoginStyles";
 import {styles} from "../Styles/styles";
-import React, {useEffect, useState} from 'react'
+import React, {useState} from 'react'
 import {View, Text, TextInput} from 'react-native'
 import * as authLib from "firebase/auth";
+import {db} from "../config";
 
 const LoginScreen = ({navigation}) => {
     const [isLogged, setIsLogged] = useState(false)
@@ -11,33 +12,29 @@ const LoginScreen = ({navigation}) => {
     const [password, setPassword] = useState('')
     const [error, setError] = useState('')
 
-    const checkLogin = async () => {
-        try {
-
-            firebase.auth().signInWithEmailAndPassword(email, password).then(() => {
-                    console.log("LOGGED IN");
-                    return true;
-                }
-            ).catch((error) =>
-                console.log(error.msg)
-            );
-        } catch (err) {
-            console.log(err)
-            return false;
-        }
+    const checkLogin = async (navigation) => {
+        const auth = authLib.getAuth(db.app);
+        authLib.signInWithEmailAndPassword(auth, email, password)
+            .then(() => {
+                navigation.navigate("Menu")
+                return true;
+            })
+            .catch((error) => {
+                console.log(error);
+                return false;
+            })
     }
 
     const handleLogin = async () => {
         const isSuccessful = await checkLogin()
         if (isSuccessful) {
             setIsLogged(true)
-            console.log("DUPAr")
-            navigation.replace('MainTab')
+            navigation.navigate('Cart')
         } else {
-            alert("Invalid email or password")
             setError('Invalid email or password')
         }
     }
+
 
     return (
         <View style={loginStyles.login_container}>
