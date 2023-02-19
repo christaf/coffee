@@ -12,12 +12,12 @@ const LoginScreen = ({navigation}) => {
     const [password, setPassword] = useState('')
     const [error, setError] = useState('')
 
-    const checkLogin = async (navigation) => {
+    const checkLogin = async () => {
         const auth = authLib.getAuth(db.app);
         console.log(email, password);
         authLib.signInWithEmailAndPassword(auth, email, password)
             .then(() => {
-                navigation.navigate("Menu")
+                navigation.navigate("MainTab")
                 return true;
             })
             .catch((error) => {
@@ -46,12 +46,16 @@ const LoginScreen = ({navigation}) => {
                     style={loginStyles.input}
                     placeholder="Login"
                     keyboardType="email-address"
+                    onChangeText={(text) => setEmail(text)}
+                    value={email}
                 />
                 <Text style={styles.text}>Password:</Text>
                 <TextInput
                     style={loginStyles.input}
                     placeholder="Password"
                     secureTextEntry={true}
+                    onChangeText={(text) => setPassword(text)}
+                    value={password}
                 />
             </View>
 
