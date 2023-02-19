@@ -7,32 +7,40 @@ import * as authLib from "firebase/auth";
 import {db} from "../config";
 
 const LoginScreen = ({navigation}) => {
-    const [isLogged, setIsLogged] = useState(false)
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [error, setError] = useState('')
 
-    const checkLogin = async () => {
-        const auth = authLib.getAuth(db.app);
-        console.log(email, password);
-        authLib.signInWithEmailAndPassword(auth, email, password)
-            .then(() => {
-                navigation.navigate("MainTab")
-                return true;
-            })
-            .catch((error) => {
-                console.log(error);
-                return false;
-            })
-    }
 
     const handleLogin = async () => {
-        const isSuccessful = await checkLogin()
-        if (isSuccessful === true) {
-            setIsLogged(true)
-        } else {
-            console.log(error.msg)
-            setError('Invalid email or password')
+        const auth = authLib.getAuth(db.app);
+        console.log(email, password);
+        try {
+            const userCredential = await authLib.signInWithEmailAndPassword(auth, email, password);
+            console.log("SIGNED IN")
+            // if (!userCredential.user.emailVerified) {
+            //     throw new Error('Please verify your email address before logging in.');
+            // }
+            navigation.replace("MainTab");
+        } catch (error) {
+            let errorMessage = '';
+            switch (error.code) {
+                case 'auth/invalid-email':
+                case 'auth/wrong-password':
+                    errorMessage = 'Invalid email or password';
+                    break;
+                case 'auth/user-not-found':
+                    errorMessage = 'User not found';
+                    break;
+                case 'auth/user-disabled':
+                    errorMessage = 'User disabled';
+                    break;
+                default:
+                    errorMessage = 'Unknown error occurred';
+                    break;
+            }
+            setError(errorMessage);
+            console.log(errorMessage);
         }
     }
 
