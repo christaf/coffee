@@ -14,6 +14,7 @@ const LoginScreen = ({navigation}) => {
 
     const checkLogin = async (navigation) => {
         const auth = authLib.getAuth(db.app);
+        console.log(email, password);
         authLib.signInWithEmailAndPassword(auth, email, password)
             .then(() => {
                 navigation.navigate("Menu")
@@ -27,9 +28,8 @@ const LoginScreen = ({navigation}) => {
 
     const handleLogin = async () => {
         const isSuccessful = await checkLogin()
-        if (isSuccessful) {
+        if (isSuccessful === true) {
             setIsLogged(true)
-            navigation.navigate('Cart')
         } else {
             console.log(error.msg)
             setError('Invalid email or password')
