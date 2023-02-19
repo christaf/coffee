@@ -14,9 +14,13 @@ const SignupScreen = ({navigation}) => {
                 console.log(userCredential);
                 console.log('User account created successfully');
                 alert("Successfully signed up")
-                navigation.navigate("MainTab")
-            return userCredential.user.sendEmailVerification();
+                navigation.replace("MainTab")
+            return authLib.signInWithEmailAndPassword(auth, email, password);
             })
+            .then(()=>{
+                console.log("Logged in");
+            }
+        )
             .catch((error) => {
                 console.log(auth, email, password)
                 console.log(error);
