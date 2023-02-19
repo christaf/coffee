@@ -6,7 +6,7 @@ const SignupScreen = ({navigation}) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
-    const handleSignup = ({navigation}) => {
+    const handleSignup = () => {
         const auth = authLib.getAuth(db.app);
 
         authLib.createUserWithEmailAndPassword(auth,email, password)
@@ -14,7 +14,7 @@ const SignupScreen = ({navigation}) => {
                 console.log(userCredential);
                 console.log('User account created successfully');
                 alert("Successfully signed up")
-                navigation.navigate("Menu")
+                navigation.navigate("MainTab")
             return userCredential.user.sendEmailVerification();
             })
             .catch((error) => {
