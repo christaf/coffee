@@ -11,7 +11,6 @@ const MainScreen = ({navigation}) => {
             <Image source={require('../images/welcome_img.jpg')} style={styles.welcomeImage} />
 
             <MyButton onPress={() => {navigation.navigate('Login')}} style={styles.helloButton}> START </MyButton>
-            <MyButton onPress={() => {navigation.navigate('Settings') }} style={styles.button}> TO SETTINGZ </MyButton>
 
         </View>
     );

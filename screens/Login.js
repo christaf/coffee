@@ -72,7 +72,7 @@ const LoginScreen = ({navigation}) => {
             </MyButton>
 
             <MyButton onPress={() => {
-                navigation.navigate('SignUpScreen')
+                navigation.navigate('RegisterScreen')
             }} style={styles.button}>
                 <Text style={loginStyles.buttonText}>Register</Text>
             </MyButton>
