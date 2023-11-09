@@ -4,6 +4,7 @@ import {useNavigation} from "@react-navigation/native";
 import {ProductStyles} from "../../Styles/ProductStyles";
 import {Button} from "react-native-paper";
 import React from "react";
+import Cart from "./Cart";
 
 
 const ProductMenu = () => {
@@ -31,7 +32,9 @@ const ProductMenu = () => {
                 <Button style={{ marginTop: 5}}
                         buttonColor={'#213769'}
                         mode="contained"
-                        onPress={() => console.log('Deleted')}>
+                        onPress={()=> navigation.navigate(Cart)}
+                        //onPress={() => console.log('Deleted')}
+                >
                     Checkout
                 </Button>
             </View>
