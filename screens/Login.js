@@ -23,7 +23,7 @@ const LoginScreen = ({navigation}) => {
         try{
             console.log("Sending data");
             //const response = await fetch("http://127.0.0.1:5000/login", { #nie dziala
-            const response = await fetch("http://192.168.0.172:5000/login", {
+            const response = await fetch("http://192.168.0.172:5000/login", {//lokalny adres ip
                 method: "POST",
                 headers: {
                     "Content-Type":"application/json"
