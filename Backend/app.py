@@ -20,8 +20,12 @@ def login():
     result = check_login(content['Email'], content['Password'])
     if result:
         return jsonify({"status": "success", "message": "Login successful!"})
-    #if content['Email'] == 'email' and content['Password'] == 'password':
-        #return jsonify({"status": "success", "message": "Login successful!"})
+
+
+@app.route('/register', methods=['POST'])
+def register():
+    content = request.json
+
 
 
 if __name__ == "__main__":

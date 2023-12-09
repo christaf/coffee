@@ -9,6 +9,16 @@ import {db} from '../config'
 import {collection, query, where, getDocs} from 'firebase/firestore'
 
 function RegisterScreen() {
+
+
+
+
+
+
+
+
+
+
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [passwordCheck, setPasswordCheck] = useState('');

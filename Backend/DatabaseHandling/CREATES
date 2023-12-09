@@ -89,3 +89,9 @@ CREATE  TABLE apkidb.address (
 ALTER TABLE apkidb.orders ADD is_paid BOOLEAN NOT NULL DEFAULT false
 
 ALTER TABLE apkidb.`user` MODIFY customer_id INT NULL
+
+ALTER TABLE apkidb.orders ADD discount INT
+
+ALTER TABLE apkidb.default_coffees ADD photo_url VARCHAR(256)
+
+#https://www.theknowledgeacademy.com/blog/types-of-coffee/

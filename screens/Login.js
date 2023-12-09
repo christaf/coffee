@@ -39,6 +39,7 @@ const LoginScreen = ({navigation}) => {
                 console.log("Status: ", responseData.status);
                 console.log("Message: ", responseData.message);
                 if(responseData.status === "success"){
+                    setIsLogged(true)
                     navigation.navigate('MainTab')
                 }
             }
@@ -46,6 +47,7 @@ const LoginScreen = ({navigation}) => {
         catch (error){
             setError('Invalid email or password')
             console.error(error);
+            setError('Invalid email or password')
             if (error.response){
                 console.error('Response status:', error.response.status);
                 console.error('Response data:', error.response.data);
