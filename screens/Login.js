@@ -15,6 +15,7 @@ const LoginScreen = ({navigation}) => {
 
 
     async function handleLogin(){
+
         const jsonData = {
             Email: email,
             Password: password
@@ -22,8 +23,8 @@ const LoginScreen = ({navigation}) => {
 
         try{
             console.log("Sending data");
-            //const response = await fetch("http://127.0.0.1:5000/login", { #nie dziala
-            const response = await fetch("http://192.168.0.172:5000/login", {
+            // const response = await fetch("http://127.0.0.1:5000/login", { //#nie dziala
+            const response = await fetch("http://192.168.0.108:5000/login", {
                 method: "POST",
                 headers: {
                     "Content-Type":"application/json"
@@ -53,55 +54,7 @@ const LoginScreen = ({navigation}) => {
         }
     }
 
-    /*
-    const [isLogged, setIsLogged] = useState(false)
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
-    const [error, setError] = useState('')
 
-    const checkLogin = async () => {
-        try {
-            //Do testów pomija login
-            return true;
-
-            const q = query(collection(db, 'users'),
-                where('password', '==', password),
-                where('email', '==', email))
-
-            const querySnapshot = await getDocs(q)
-            return querySnapshot.size > 0;
-            // querySnapshot.forEach((doc) => {
-            //     setIsLogged(true)
-            //     console.log(doc.id, ' => ', doc.data())
-            // })
-        } catch (err) {
-            console.log(err)
-            return false;
-        }
-    }
-
-    const handleLogin = async () => {
-        const isSuccessful = await checkLogin()
-        if (isSuccessful) {
-            setIsLogged(true)
-            navigation.navigate('MainTab')
-        } else {
-            alert("Invalid email or password")
-            setError('Invalid email or password')
-        }
-    }
-
-    //czym sie roznia te dwa
-
-    useEffect(() => {
-        // isLogged
-        //     ? navigation.navigate('Cart')
-        //     : setError('Invalid email or password')
-    }, [isLogged])
-
-    console.log(error)
-
-     */
     return (
         <View style={loginStyles.login_container}>
             <Text style={styles.welcomeText}>Please login!</Text>
