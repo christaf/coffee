@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project name="ApkiDB" id="Project-cce" database="MariaDb" >
+	<schema name="apkidb" >
+		<table name="address" prior="tbl" >
+			<column name="address_id" type="INT" jt="4" mandatory="y" >
+				<identity><![CDATA[AUTO_INCREMENT]]></identity>
+			</column>
+			<column name="country" type="VARCHAR" length="128" jt="12" />
+			<column name="city" type="VARCHAR" length="128" jt="12" />
+			<column name="street" type="VARCHAR" length="128" jt="12" />
+			<column name="street_number" type="INT" jt="4" />
+			<index name="pk_address" unique="PRIMARY_KEY" >
+				<column name="address_id" />
+			</index>
+			<options><![CDATA[engine=InnoDB]]></options>
+		</table>
+		<table name="customers" prior="tbl" >
+			<column name="customer_id" type="INT" jt="4" mandatory="y" >
+				<identity><![CDATA[AUTO_INCREMENT]]></identity>
+			</column>
+			<column name="customer_name" type="VARCHAR" length="128" jt="12" />
+			<column name="address_id" type="INT" jt="4" />
+			<column name="favourites_id" type="INT" jt="4" />
+			<index name="pk_customers" unique="PRIMARY_KEY" >
+				<column name="customer_id" />
+			</index>
+			<index name="unq_customers_favourites_id" unique="UNIQUE_KEY" >
+				<column name="favourites_id" />
+			</index>
+			<fk name="fk_customers_favourite_items" to_schema="apkidb" to_table="favourite_items" >
+				<fk_column name="favourites_id" pk="favourite_item_id" />
+			</fk>
+			<fk name="fk_customers_address" to_schema="apkidb" to_table="address" >
+				<fk_column name="address_id" pk="address_id" />
+			</fk>
+			<options><![CDATA[engine=InnoDB]]></options>
+		</table>
+		<table name="default_coffees" prior="tbl" >
+			<column name="default_coffee_id" type="INT" jt="4" mandatory="y" >
+				<identity><![CDATA[AUTO_INCREMENT]]></identity>
+			</column>
+			<column name="name" type="VARCHAR" length="128" jt="12" />
+			<column name="bean_type" type="VARCHAR" length="128" jt="12" />
+			<column name="brewing_type" type="VARCHAR" length="128" jt="12" />
+			<index name="pk_default_coffees" unique="PRIMARY_KEY" >
+				<column name="default_coffee_id" />
+			</index>
+			<options><![CDATA[engine=InnoDB]]></options>
+		</table>
+		<table name="delivery" prior="tbl" >
+			<column name="delivery_id" type="INT" jt="4" mandatory="y" >
+				<identity><![CDATA[AUTO_INCREMENT]]></identity>
+			</column>
+			<column name="order_id" type="INT" jt="4" mandatory="y" />
+			<column name="delivery_date" type="DATE" jt="91" >
+				<defo><![CDATA[CURRENT_DATE]]></defo>
+			</column>
+			<index name="pk_delivery" unique="PRIMARY_KEY" >
+				<column name="delivery_id" />
+			</index>
+			<index name="unq_delivery_order_id" unique="UNIQUE_KEY" >
+				<column name="order_id" />
+			</index>
+			<options><![CDATA[engine=InnoDB]]></options>
+		</table>
+		<table name="favourite_items" prior="tbl" >
+			<column name="favourite_item_id" type="INT" jt="4" mandatory="y" >
+				<identity><![CDATA[AUTO_INCREMENT]]></identity>
+			</column>
+			<column name="default_coffee" type="INT" jt="4" mandatory="y" />
+			<column name="sweetner_type" type="VARCHAR" length="128" jt="12" />
+			<column name="sweetner_amount" type="INT" jt="4" />
+			<column name="creamer_type" type="VARCHAR" length="128" jt="12" />
+			<column name="creamer_amount" type="INT" jt="4" />
+			<column name="additive_1" type="VARCHAR" length="128" jt="12" />
+			<column name="additive_2" type="VARCHAR" length="128" jt="12" />
+			<column name="additive_3" type="VARCHAR" length="128" jt="12" />
+			<index name="pk_favourite_items" unique="PRIMARY_KEY" >
+				<column name="favourite_item_id" />
+			</index>
+			<index name="unq_favourite_items_default_coffee" unique="UNIQUE_KEY" >
+				<column name="default_coffee" />
+			</index>
+			<fk name="fk_favourite_items" to_schema="apkidb" to_table="default_coffees" >
+				<fk_column name="default_coffee" pk="default_coffee_id" />
+			</fk>
+			<options><![CDATA[engine=InnoDB]]></options>
+		</table>
+		<table name="orderable_item" prior="tbl" >
+			<column name="orderable_item_id" type="INT" jt="4" mandatory="y" >
+				<identity><![CDATA[AUTO_INCREMENT]]></identity>
+			</column>
+			<column name="default_coffee_id" type="INT" jt="4" mandatory="y" />
+			<column name="sweetner_type" type="VARCHAR" length="128" jt="12" />
+			<column name="sweetner_amount" type="INT" jt="4" />
+			<column name="creamer_type" type="VARCHAR" length="128" jt="12" />
+			<column name="creamer_amount" type="INT" jt="4" />
+			<column name="additive_1" type="VARCHAR" length="128" jt="12" />
+			<column name="additive_2" type="VARCHAR" length="128" jt="12" />
+			<column name="additive_3" type="VARCHAR" length="128" jt="12" />
+			<index name="pk_orderable_item" unique="PRIMARY_KEY" >
+				<column name="orderable_item_id" />
+			</index>
+			<index name="unq_orderable_item_default_coffee_id" unique="UNIQUE_KEY" >
+				<column name="default_coffee_id" />
+			</index>
+			<fk name="fk_orderable_item" to_schema="apkidb" to_table="default_coffees" >
+				<fk_column name="default_coffee_id" pk="default_coffee_id" />
+			</fk>
+			<options><![CDATA[engine=InnoDB]]></options>
+		</table>
+		<table name="orders" prior="tbl" >
+			<column name="order_id" type="INT" jt="4" mandatory="y" >
+				<identity><![CDATA[AUTO_INCREMENT]]></identity>
+			</column>
+			<column name="customer_id" type="INT" jt="4" mandatory="y" />
+			<column name="orderable_items_id" prior="orderable_item_id" type="INT" jt="4" />
+			<column name="total_cost" type="INT" jt="4" />
+			<index name="pk_orders" unique="PRIMARY_KEY" >
+				<column name="order_id" />
+			</index>
+			<index name="unq_orders_orderable_item_id" unique="UNIQUE_KEY" >
+				<column name="orderable_items_id" />
+			</index>
+			<fk name="fk_orders_customers" to_schema="apkidb" to_table="customers" >
+				<fk_column name="customer_id" pk="customer_id" />
+			</fk>
+			<fk name="fk_orders_orderable_item" to_schema="apkidb" to_table="orderable_item" >
+				<fk_column name="orderable_items_id" pk="orderable_item_id" />
+			</fk>
+			<fk name="fk_orders_delivery" to_schema="apkidb" to_table="delivery" >
+				<fk_column name="order_id" pk="order_id" />
+			</fk>
+			<options><![CDATA[engine=InnoDB]]></options>
+		</table>
+		<table name="user" prior="tbl" >
+			<column name="user_id" prior="customer_id" type="INT" jt="4" mandatory="y" >
+				<identity><![CDATA[AUTO_INCREMENT]]></identity>
+			</column>
+			<column name="customer_id" type="INT" jt="4" mandatory="y" />
+			<column name="email" type="VARCHAR" length="128" jt="12" mandatory="y" />
+			<column name="password" type="VARCHAR" length="128" jt="12" mandatory="y" />
+			<index name="pk_tbl" unique="PRIMARY_KEY" >
+				<column name="user_id" />
+			</index>
+			<index name="unq_user_customer_id" unique="UNIQUE_KEY" >
+				<column name="customer_id" />
+			</index>
+			<fk name="fk_user_user" to_schema="apkidb" to_table="customers" >
+				<fk_column name="customer_id" pk="customer_id" />
+			</fk>
+			<options><![CDATA[engine=InnoDB]]></options>
+		</table>
+	</schema>
+	<layout name="Default Layout" id="Layout-2010" show_relation="columns" >
+		<entity schema="apkidb" name="address" color="C1D8EE" x="352" y="336" />
+		<entity schema="apkidb" name="customers" color="C1D8EE" x="576" y="336" />
+		<entity schema="apkidb" name="default_coffees" color="C1D8EE" x="576" y="576" />
+		<entity schema="apkidb" name="delivery" color="C1D8EE" x="1072" y="336" />
+		<entity schema="apkidb" name="favourite_items" color="C1D8EE" x="352" y="512" />
+		<entity schema="apkidb" name="orderable_item" color="C1D8EE" x="800" y="512" />
+		<entity schema="apkidb" name="orders" color="C1D8EE" x="800" y="336" />
+		<entity schema="apkidb" name="user" color="C1D8EE" x="576" y="144" />
+		<callout x="48" y="48" pointer="Round" >
+			<comment><![CDATA[This is a layout - a diagram with tools.
+- Create new entities by right-clicking the layout. 
+- Double-click entity headers to edit.
+- For a better understanding of the schema, create multiple layouts.
+- Deploy the model into the database by converting it first to the physical design.]]></comment>
+		</callout>
+	</layout>
+</project>
