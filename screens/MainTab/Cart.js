@@ -24,7 +24,7 @@ const Cart = () => {
                     </View>
                 }
             />
-            <MyButton onPress={() => {checkout}} style={styles.button}>
+            <MyButton onPress={checkout} style={styles.button}>
                 Checkout
             </MyButton>
         </View>
