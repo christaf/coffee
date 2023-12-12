@@ -7,6 +7,7 @@ import favourite from "./Favourite";
 import map from "./Map";
 import cart from "./Cart";
 import settings from "./Settings";
+import CubeThrower from "./DiscountGenerator";
 
 const FavouriteScreen = favourite;
 const ProductMenu = productMenu;
@@ -67,7 +68,7 @@ const MainTab = () => {
                             headerShown: false,
                         }}
             />
-            }
+
         </Tab.Navigator>
     )
 }

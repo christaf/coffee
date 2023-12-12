@@ -12,6 +12,11 @@ const LoginScreen = ({navigation}) => {
 
 
     async function handleLogin(){
+        navigation.reset({
+            index: 0,
+            routes: [{ name: 'MainTab' }], // Replace 'MainTab' with the name of your main screen
+        });
+
         const jsonData = {
             Email: email,
             Password: password
@@ -19,7 +24,7 @@ const LoginScreen = ({navigation}) => {
 
         try{
             console.log("Sending data");
-            const response = await fetch("http://192.168.0.172:5000/login", {//lokalny adres ip
+            const response = await fetch("http://192.168.0.104:5000/login", {
                 method: "POST",
                 headers: {
                     "Content-Type":"application/json"
