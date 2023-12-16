@@ -1,6 +1,7 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 
+from DatabaseHandling.check_and_register import insert_user
 from DatabaseHandling.check_login_handler import check_login
 
 app = Flask(__name__)
@@ -25,6 +26,10 @@ def login():
 @app.route('/register', methods=['POST'])
 def register():
     content = request.json
+    print(content)
+    result = insert_user(content['Email'], content['Password'])
+    return jsonify(result)
+    #return jsonify({"status": "success", "message": "Registration successful!"})
 
 
 
