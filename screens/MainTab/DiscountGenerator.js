@@ -1,37 +1,106 @@
-import React, { useRef, useState } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, Animated } from 'react-native';
+import React, {useState, useEffect, useRef} from 'react';
+import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { Accelerometer } from 'expo-sensors';
+import Animated, {
+    useSharedValue,
+    useAnimatedStyle,
+    withSpring,
+    withRepeat,
+} from 'react-native-reanimated';
 
 const CubeThrower = () => {
+    const [data, setData] = useState({
+        x: 0,
+        y: 0,
+        z: 0,
+    });
+    const startData = useRef({ x: 0, y: 0, z: 0 });
+
+    const [subscription, setSubscription] = useState(null);
+
+    const _subscribe = () => {
+        setSubscription(
+            Accelerometer.addListener(accelerometerData => {
+                setData(accelerometerData);
+                startData.current = accelerometerData; // Update startData when accelerometer data changes
+            })
+        );
+    };
+
+    const _unsubscribe = () => {
+        subscription && subscription.remove();
+        setSubscription(null);
+    };
+
     const [discount, setDiscount] = useState(null);
-    const rotateValue = useRef(new Animated.Value(0)).current;
+    const rotationValue = useSharedValue(0);
+
+    useEffect(() => {
+        _subscribe();
+        return () => _unsubscribe();
+    }, []);
 
     const startRotation = () => {
-        const randomRotations = Math.floor(Math.random() * 5) + 1; // Random rotations between 1 and 5
-        const finalRotation = 360 * randomRotations + 30; // 30 degrees to ensure a little more spinning
+        _unsubscribe(); // Stop listening to new accelerometer data
 
-        Animated.timing(rotateValue, {
-            toValue: finalRotation,
-            duration: 2000, // Adjust the duration as needed
-            useNativeDriver: true,
-        }).start(() => {
-            determineDiscount(randomRotations);
-        });
+        let startTime = Date.now();
+        // let startData = { ...data };
+
+        const intervalId = setInterval(() => {
+            _subscribe()
+            let currentTime = Date.now();
+            let deltaTime = (currentTime - startTime) / 1000; // Convert to seconds
+
+            // Calculate the velocity based on the change in accelerometer data
+            let deltaData = data.y - startData.current.y;
+            let velocity = deltaData / deltaTime;
+
+            // console.log('Delta data: ', deltaData)
+            // console.log('Delta time: ', deltaTime)
+            // console.log('Velocity: ', velocity)
+
+            // Animate the cube to rotate based on the calculated velocity
+            rotationValue.value = withRepeat(
+                withSpring(rotationValue.value + velocity * 50, {
+                    damping: 2,
+                    velocity: velocity * 500,
+                }),
+                -1 // -1 means repeat indefinitely
+            );
+
+            // startData = { ...data };
+
+            if (deltaTime >= 3) {
+                // After 3 seconds, stop the rotation and determine the discount
+                clearInterval(intervalId);
+                _unsubscribe();
+                determineDiscount(velocity);
+            }
+        }, 100);
     };
 
-    const determineDiscount = (rotations) => {
-        const faces = ['10%', '20%', 'Free Coffee', '15%', 'No Discount', '25%']; // Discounts for each face
-        const landedFace = (rotations - 1) % faces.length;
-        setDiscount(faces[landedFace]);
+    const determineDiscount = velocity => {
+        // Implement your logic to determine discount based on velocity or any other criteria
+        // For now, let's assume a simple logic
+        const discounts = ['10%', '20%', 'Free Coffee', '15%', 'No Discount', '25%'];
+        const chosenDiscount = discounts[Math.floor(velocity * discounts.length + Math.random())];
+
+        setDiscount(chosenDiscount);
     };
 
-    const spin = rotateValue.interpolate({
-        inputRange: [0, 360],
-        outputRange: ['0deg', '360deg'],
+    const animatedStyle = useAnimatedStyle(() => {
+        return {
+            transform: [{ rotate: `${rotationValue.value}deg` }],
+        };
     });
 
     return (
         <View style={styles.container}>
-            <Animated.View style={[styles.cube, { transform: [{ rotate: spin }] }]} />
+            {/*<Text style={styles.text}>Accelerometer:</Text>*/}
+            {/*<Text style={styles.text}>x: {data.x}</Text>*/}
+            {/*<Text style={styles.text}>y: {data.y}</Text>*/}
+            {/*<Text style={styles.text}>z: {data.z}</Text>*/}
+            <Animated.View style={[styles.cube, animatedStyle]} />
             <TouchableOpacity style={styles.button} onPress={startRotation}>
                 <Text style={styles.buttonText}>Throw the Cube!</Text>
             </TouchableOpacity>
@@ -63,6 +132,10 @@ const styles = StyleSheet.create({
     },
     discountText: {
         marginTop: 20,
+        fontSize: 16,
+        fontWeight: 'bold',
+    },
+    text: {
         fontSize: 16,
         fontWeight: 'bold',
     },
