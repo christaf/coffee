@@ -4,8 +4,6 @@ import {loginStyles} from "../Styles/LoginStyles";
 import {styles} from "../Styles/styles";
 import React, {useEffect, useState} from 'react'
 import {View, Text, TextInput} from 'react-native'
-import {db} from '../config'
-import {collection, query, where, getDocs} from 'firebase/firestore'
 
 const LoginScreen = ({navigation}) => {
     const [isLogged, setIsLogged] = useState(false)
