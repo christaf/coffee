@@ -8,14 +8,55 @@ import Cart from "./Cart";
 
 
 const ProductMenu = () => {
+    const [error, setError] = React.useState('');
+
+    async function fetch_coffees(){
+
+        const jsonData = {
+            message: "get_coffees"
+        }
+
+        try{
+            console.log("Sending data");
+            // const response = await fetch("http://127.0.0.1:5000/login", { //#nie dziala
+            //const response = await fetch("http://192.168.0.108:5000/login", {
+            const response = await fetch("http://192.168.0.172:5000/coffee_list", {
+                method: "POST",
+                headers: {
+                    "Content-Type":"application/json"
+                },
+                body: JSON.stringify(jsonData)
+            });
+            console.log("Data sent");
+            if(response.ok){
+                console.log("Response ok");
+                const responseData = await response.json();
+                console.error("Response data:", responseData);
+                console.log("Status: ", responseData.status);
+                console.log("Message: ", responseData.message);
+            }
+        }
+        catch (error){
+            setError('Data receiving error')
+            console.error(error);
+            if (error.response){
+                console.error('Response status:', error.response.status);
+                console.error('Response data:', error.response.data);
+            }
+        }
+    }
+
 
     const navigation = useNavigation();
     function getItems(numItems) {
-        const items = [];
+        //const items = [];
+        /*
         for (let i = 0; i < numItems; i++) {
             items.push({ id: i, name: `Item ${i}` });
         }
         return items;
+         */
+        return fetch_coffees();
     }
 
     return(

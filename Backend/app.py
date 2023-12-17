@@ -1,6 +1,7 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 
+from DatabaseHandling.fetch_coffees import fetch_coffees
 from DatabaseHandling.check_and_register import insert_user
 from DatabaseHandling.check_login_handler import check_login
 
@@ -29,8 +30,15 @@ def register():
     print(content)
     result = insert_user(content['Email'], content['Password'])
     return jsonify(result)
-    #return jsonify({"status": "success", "message": "Registration successful!"})
 
+
+@app.route('/coffee_list', methods=['POST'])
+def get_coffee_list():
+    content = request.json
+    print(content)
+    result = fetch_coffees()
+    return jsonify(result)
+    #return jsonify(['Cappuccino', 'Espresso', 'Latte', 'Mocha'])
 
 
 if __name__ == "__main__":
