@@ -1,21 +1,11 @@
-import mariadb
-import sys
-
+from .utils import connect_to_database
 
 def check_login(email, password):
     data: list = []
-    try:
-        conn = mariadb.connect(
-            host="localhost",
-            port=3306,
-            user="root",
-            password="dbapki",
-            database="apkidb")
-        print("MariaDB Platform Connected Successfully!")
-    except mariadb.Error as e:
-        print(f"Error connecting to MariaDB Platform: {e}")
-        sys.exit(1)
+
+    conn = connect_to_database()
     cur = conn.cursor()
+
     cur.execute("SELECT * FROM user WHERE email = ? AND password = ?", (email, password))
     for (user_id, customer_id, email, password) in cur:
         data.append(customer_id)

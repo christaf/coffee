@@ -1,20 +1,8 @@
-import mariadb
-import sys
-
+from .utils import connect_to_database
 
 def check_if_already_registered(email):
     user_id = None
-    try:
-        conn = mariadb.connect(
-            host="localhost",
-            port=3306,
-            user="root",
-            password="dbapki",
-            database="apkidb")
-        print("MariaDB Platform Connected Successfully!")
-    except mariadb.Error as e:
-        print(f"Error connecting to MariaDB Platform: {e}")
-        sys.exit(1)
+    conn = connect_to_database()
     cur = conn.cursor()
     cur.execute("SELECT * FROM user WHERE email = ?", (email,))
     for (user_id, customer_id, email, password) in cur:
@@ -29,17 +17,7 @@ def check_if_already_registered(email):
 
 def insert_user(email, password):
     if not (check_if_already_registered(email)):
-        try:
-            conn = mariadb.connect(
-                host="localhost",
-                port=3306,
-                user="root",
-                password="dbapki",
-                database="apkidb")
-            print("MariaDB Platform Connected Successfully!")
-        except mariadb.Error as e:
-            print(f"Error connecting to MariaDB Platform: {e}")
-            sys.exit(1)
+        conn = connect_to_database()
         cur = conn.cursor()
         cur.execute("INSERT INTO address (country) VALUES ('Your_Country')")
         cur.execute("INSERT INTO customers (address_id, customer_name) VALUES (LAST_INSERT_ID(),'Your_name')")
