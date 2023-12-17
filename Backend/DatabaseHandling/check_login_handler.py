@@ -7,9 +7,9 @@ def check_login(email, password):
     try:
         conn = mariadb.connect(
             host="localhost",
-            port=3307,
+            port=3306,
             user="root",
-            password="password",
+            password="dbapki",
             database="apkidb")
         print("MariaDB Platform Connected Successfully!")
     except mariadb.Error as e:

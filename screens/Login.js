@@ -1,8 +1,11 @@
 import MyButton from "../Elements/MyButton";
+import {Button} from "react-native-paper";
 import {loginStyles} from "../Styles/LoginStyles";
 import {styles} from "../Styles/styles";
 import React, {useEffect, useState} from 'react'
 import {View, Text, TextInput} from 'react-native'
+import {db} from '../config'
+import {collection, query, where, getDocs} from 'firebase/firestore'
 
 const LoginScreen = ({navigation}) => {
     const [isLogged, setIsLogged] = useState(false)
@@ -12,10 +15,6 @@ const LoginScreen = ({navigation}) => {
 
 
     async function handleLogin(){
-        navigation.reset({
-            index: 0,
-            routes: [{ name: 'MainTab' }], // Replace 'MainTab' with the name of your main screen
-        });
 
         const jsonData = {
             Email: email,
@@ -24,7 +23,9 @@ const LoginScreen = ({navigation}) => {
 
         try{
             console.log("Sending data");
-            const response = await fetch("http://192.168.0.104:5000/login", {
+            // const response = await fetch("http://127.0.0.1:5000/login", { //#nie dziala
+            //const response = await fetch("http://192.168.0.108:5000/login", {
+            const response = await fetch("http://192.168.0.172:5000/login", {
                 method: "POST",
                 headers: {
                     "Content-Type":"application/json"
@@ -40,7 +41,6 @@ const LoginScreen = ({navigation}) => {
                 console.log("Status: ", responseData.status);
                 console.log("Message: ", responseData.message);
                 if(responseData.status === "success"){
-                    setIsLogged(true)
                     navigation.navigate('MainTab')
                 }
             }
@@ -48,14 +48,14 @@ const LoginScreen = ({navigation}) => {
         catch (error){
             setError('Invalid email or password')
             console.error(error);
-            setError('Invalid email or password')
             if (error.response){
                 console.error('Response status:', error.response.status);
                 console.error('Response data:', error.response.data);
             }
         }
-
     }
+
+
     return (
         <View style={loginStyles.login_container}>
             <Text style={styles.welcomeText}>Please login!</Text>
