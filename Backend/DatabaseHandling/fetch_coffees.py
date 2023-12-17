@@ -1,21 +1,24 @@
-import mariadb
-import sys
+from .utils import connect_to_database
 
 
 def fetch_coffees():
     data: list = [[] for i in range(4)]  # [[], [], [], []]
-    try:
-        conn = mariadb.connect(
-            host="localhost",
-            port=3306,
-            user="root",
-            password="dbapki",
-            database="apkidb")
-        print("MariaDB Platform Connected Successfully!")
-    except mariadb.Error as e:
-        print(f"Error connecting to MariaDB Platform: {e}")
-        sys.exit(1)
+
+    #try:
+    #    conn = mariadb.connect(
+    #        host="localhost",
+    #        port=3306,
+    #        user="root",
+    #        password="dbapki",
+    #        database="apkidb")
+    #    print("MariaDB Platform Connected Successfully!")
+    #except mariadb.Error as e:
+    #    print(f"Error connecting to MariaDB Platform: {e}")
+    #    sys.exit(1)
+
+    conn = connect_to_database()
     cur = conn.cursor()
+
     cur.execute("SELECT * FROM default_coffees")
     print(cur)
     for (default_coffee_id, name, bean_type, brewing_type, photo_url) in cur:

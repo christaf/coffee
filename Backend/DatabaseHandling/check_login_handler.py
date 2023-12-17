@@ -1,5 +1,6 @@
 from .utils import connect_to_database
 
+
 def check_login(email, password):
     data: list = []
 
