@@ -9,6 +9,7 @@ import Cart from "./Cart";
 
 const ProductMenu = () => {
     const [error, setError] = React.useState('');
+    const [response, setResponse] = React.useState('');
 
     async function fetch_coffees(){
 
@@ -31,9 +32,11 @@ const ProductMenu = () => {
             if(response.ok){
                 console.log("Response ok");
                 const responseData = await response.json();
-                console.error("Response data:", responseData);
-                console.log("Status: ", responseData.status);
-                console.log("Message: ", responseData.message);
+                setResponse(responseData);
+                //console.error("Response data:", responseData);
+                return JSON.stringify(responseData);
+                //console.log("Status: ", responseData.status);
+                //console.log("Message: ", responseData.message);
             }
         }
         catch (error){
@@ -49,14 +52,24 @@ const ProductMenu = () => {
 
     const navigation = useNavigation();
     function getItems(numItems) {
-        //const items = [];
+        //TODO parsowanie danyck z response
+        let server_data;
+        server_data = fetch_coffees()
+        console.log("getItemsTRIGGERED")
+        //console.log("server_data:", server_data)
+        console.log("response:", response)
         /*
+        let server_data;
+        server_data = fetch_coffees();
+        console.log(server_data)
+        const items = [];
         for (let i = 0; i < numItems; i++) {
-            items.push({ id: i, name: `Item ${i}` });
+            items.push({ name: server_data[0][i], bean_type: server_data[1][i], brewing_type: server_data[2][i], photo_url: server_data[3][i] });
         }
         return items;
+
          */
-        return fetch_coffees();
+        //return fetch_coffees();
     }
 
     return(
@@ -64,8 +77,9 @@ const ProductMenu = () => {
             <FlatList
                 data={getItems(5)}
                 renderItem={({ item }) =>
+                    //<OrderableItem title={data[0][1]} description={'Order plox'}></OrderableItem>
                     <View style={ProductStyles.item}>
-                        <OrderableItem title={'CAFFE'} description={'Order plox'}></OrderableItem>
+                        <OrderableItem title={data.items.name} description={'Order plox'}></OrderableItem>
                     </View>
                 }
             />
