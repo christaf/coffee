@@ -40,13 +40,8 @@ def get_coffee_list():
     content = request.json
     print(content)
     result = fetch_coffees()
-    #print(result[1])
-    #print(result[2])
-    #print(result[3])
-    #return jsonify(result[0])
+
     return jsonify(result)
-    #return result
-    #return jsonify(['Cappuccino', 'Espresso', 'Latte', 'Mocha'])
 
 if __name__ == "__main__":
     _, server_config = read_config()

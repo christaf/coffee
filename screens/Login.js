@@ -1,5 +1,4 @@
 import MyButton from "../Elements/MyButton";
-import {Button} from "react-native-paper";
 import {loginStyles} from "../Styles/LoginStyles";
 import {styles} from "../Styles/styles";
 import React, {useEffect, useState} from 'react'
@@ -21,26 +20,21 @@ const LoginScreen = ({navigation}) => {
 
         try{
             console.log("Sending data");
-            // const response = await fetch("http://127.0.0.1:5000/login", { //#nie dziala
-            //const response = await fetch("http://192.168.0.108:5000/login", {
-            const response = await fetch("http://192.168.0.172:5000/login", {
+            const response = await fetch("http://192.168.0.105:5000/login", {
                 method: "POST",
                 headers: {
                     "Content-Type":"application/json"
                 },
                 body: JSON.stringify(jsonData)
             });
-            console.log("Data sent");
             if(response.ok){
                 setIsLogged(true)
-                console.log("Response ok");
                 const responseData = await response.json();
-                console.error("Response data:", responseData);
-                console.log("Status: ", responseData.status);
-                console.log("Message: ", responseData.message);
-                if(responseData.status === "success"){
-                    navigation.navigate('MainTab')
-                }
+                //TODO do testow wylaczymy zeby bylo szybciej
+                // if(responseData.status === "success"){
+                //     navigation.navigate('MainTab')
+                // }
+                navigation.navigate('MainTab')
             }
         }
         catch (error){

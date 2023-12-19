@@ -1,99 +1,94 @@
-import {FlatList, View} from "react-native";
-import OrderableItem from "../../Elements/OrderableItem";
+import React, {useState, useEffect} from "react";
+import {View, Text} from "react-native";
+import {FlatList} from "react-native";
 import {useNavigation} from "@react-navigation/native";
-import {ProductStyles} from "../../Styles/ProductStyles";
 import {Button} from "react-native-paper";
-import React from "react";
+import {ProductStyles} from "../../Styles/ProductStyles";
 import Cart from "./Cart";
 
-
 const ProductMenu = () => {
-    const [error, setError] = React.useState('');
-    const [response, setResponse] = React.useState('');
+    const [error, setError] = useState('');
+    const [coffeeData, setCoffeeData] = useState([]);
 
-    async function fetch_coffees(){
-
+    const fetchCoffees = async () => {
         const jsonData = {
             message: "get_coffees"
-        }
+        };
 
-        try{
+        try {
             console.log("Sending data");
-            // const response = await fetch("http://127.0.0.1:5000/login", { //#nie dziala
-            //const response = await fetch("http://192.168.0.108:5000/login", {
-            const response = await fetch("http://192.168.0.172:5000/coffee_list", {
+            const response = await fetch("http://192.168.0.105:5000/coffee_list", {
                 method: "POST",
                 headers: {
-                    "Content-Type":"application/json"
+                    "Content-Type": "application/json"
                 },
                 body: JSON.stringify(jsonData)
             });
-            console.log("Data sent");
-            if(response.ok){
-                console.log("Response ok");
+
+
+            if (response.ok) {
                 const responseData = await response.json();
-                setResponse(responseData);
-                //console.error("Response data:", responseData);
-                return JSON.stringify(responseData);
-                //console.log("Status: ", responseData.status);
-                //console.log("Message: ", responseData.message);
+                const parsedData = JSON.parse(responseData);
+                console.log("Parsed data:", parsedData)
+                setCoffeeData(parsedData);
             }
-        }
-        catch (error){
-            setError('Data receiving error')
+        } catch (error) {
+            setError('Data receiving error');
             console.error(error);
-            if (error.response){
+            if (error.response) {
                 console.error('Response status:', error.response.status);
                 console.error('Response data:', error.response.data);
             }
         }
-    }
+    };
 
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                await fetchCoffees();
+                console.log("Coffee data:", coffeeData);
+
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            }
+        };
+
+        fetchData().then(r => console.log(r));
+    }, []);
 
     const navigation = useNavigation();
-    function getItems(numItems) {
-        //TODO parsowanie danyck z response
-        let server_data;
-        server_data = fetch_coffees()
-        console.log("getItemsTRIGGERED")
-        //console.log("server_data:", server_data)
-        console.log("response:", response)
-        /*
-        let server_data;
-        server_data = fetch_coffees();
-        console.log(server_data)
-        const items = [];
-        for (let i = 0; i < numItems; i++) {
-            items.push({ name: server_data[0][i], bean_type: server_data[1][i], brewing_type: server_data[2][i], photo_url: server_data[3][i] });
-        }
-        return items;
 
-         */
-        //return fetch_coffees();
-    }
+    const renderItem = ({item}) => (
+        <View style={ProductStyles.item}>
+            <Text>{item.name}</Text>
+            <Text>{item.bean_type}</Text>
+            <Text>{item.brewing_type}</Text>
+        </View>
+    );
 
-    return(
-        <View style={ ProductStyles.productsScreen }>
+    const handleCheckout = () => {
+        navigation.navigate(Cart);
+    };
+
+    return (
+        <View style={ProductStyles.productsScreen}>
             <FlatList
-                data={getItems(5)}
-                renderItem={({ item }) =>
-                    //<OrderableItem title={data[0][1]} description={'Order plox'}></OrderableItem>
-                    <View style={ProductStyles.item}>
-                        <OrderableItem title={data.items.name} description={'Order plox'}></OrderableItem>
-                    </View>
-                }
+                data={coffeeData}
+                renderItem={renderItem}
+                keyExtractor={(item) => (item.default_coffee_id.toString())}
             />
-            <View style={{ padding: 10 }}>
-                <Button style={{ marginTop: 5}}
-                        buttonColor={'#213769'}
-                        mode="contained"
-                        onPress={()=> navigation.navigate(Cart)}
-                        //onPress={() => console.log('Deleted')}
+            <View style={{padding: 10}}>
+                <Button
+                    style={{marginTop: 5}}
+                    buttonColor={'#213769'}
+                    mode="contained"
+                    onPress={handleCheckout}
                 >
                     Checkout
                 </Button>
             </View>
         </View>
     );
-}
+};
+
 export default ProductMenu;
