@@ -10,11 +10,12 @@ def fetch_coffees():
     cur.execute("SELECT * FROM default_coffees")
     data = []
 
-    for (default_coffee_id, name, bean_type, brewing_type, photo_url) in cur:
+    for (default_coffee_id, name, bean_type, brewing_type, photo_url, price) in cur:
         item = {"default_coffee_id": default_coffee_id, "name": name, "bean_type": bean_type,
                 "brewing_type": brewing_type, "photo_url": photo_url}
         data.append(item)
 
+    print(data)
     jsonData = json.dumps(data)
     conn.commit()
     conn.close()

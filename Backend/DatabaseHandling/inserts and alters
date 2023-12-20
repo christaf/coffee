@@ -1,0 +1,22 @@
+INSERT INTO favourite_items (
+    favourite_item_id,
+    default_coffee,
+    sweetener_type,
+    sweetener_amount,
+    creamer_type,
+    creamer_amount,
+    additive_1,
+    additive_2,
+    additive_3
+) VALUES
+(1, 'Espresso', 'Sugar', '1 tsp', 'Milk', '2 tbsp', 'Cinnamon', 'Vanilla extract', 'Whipped cream'),
+(2, 'Latte', 'Honey', '2 tsp', 'Almond milk', '3 tbsp', 'Caramel syrup', 'Nutmeg', 'None'),
+(3, 'Cappuccino', 'Stevia', '1.5 tsp', 'Soy milk', '2.5 tbsp', 'Hazelnut syrup', 'Chocolate powder', 'Whipped cream');
+
+
+ALTER TABLE default_coffees
+ADD COLUMN price DECIMAL(10, 2);
+UPDATE default_coffees
+SET price = ROUND(RAND() * (6.99 - 3.99) + 3.99, 2);
+
+

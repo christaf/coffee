@@ -19,7 +19,6 @@ const LoginScreen = ({navigation}) => {
         }
 
         try{
-            console.log("Sending data");
             const response = await fetch("http://192.168.0.105:5000/login", {
                 method: "POST",
                 headers: {
@@ -30,11 +29,9 @@ const LoginScreen = ({navigation}) => {
             if(response.ok){
                 setIsLogged(true)
                 const responseData = await response.json();
-                //TODO do testow wylaczymy zeby bylo szybciej
-                // if(responseData.status === "success"){
-                //     navigation.navigate('MainTab')
-                // }
-                navigation.navigate('MainTab')
+                if(responseData.status === "success"){
+                    navigation.navigate('MainTab')
+                }
             }
         }
         catch (error){

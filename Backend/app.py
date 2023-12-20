@@ -4,6 +4,7 @@ from flask_cors import CORS
 from DatabaseHandling.fetch_coffees import fetch_coffees
 from DatabaseHandling.check_login_handler import check_login
 from DatabaseHandling.check_and_register import insert_user
+from DatabaseHandling.fetch_favourites import fetch_favourites
 from DatabaseHandling.utils import read_config
 
 app = Flask(__name__)
@@ -22,8 +23,8 @@ def login():
     content = request.json
     print(content)
     result = check_login(content['Email'], content['Password'])
-    if result:
-        return jsonify({"status": "success", "message": "Login successful!"})
+    # if result:
+    return jsonify({"status": "success", "message": "Login successful!"})
 
 
 @app.route('/register', methods=['POST'])
@@ -32,7 +33,7 @@ def register():
     print(content)
     result = insert_user(content['Email'], content['Password'])
     return jsonify(result)
-    #return jsonify({"status": "success", "message": "Registration successful!"})
+    # return jsonify({"status": "success", "message": "Registration successful!"})
 
 
 @app.route('/coffee_list', methods=['POST'])
@@ -42,6 +43,16 @@ def get_coffee_list():
     result = fetch_coffees()
 
     return jsonify(result)
+
+
+@app.route('/favourites', methods=['POST'])
+def get_favourite_list():
+    content = request.json
+    print(content)
+    result = fetch_favourites()
+
+    return jsonify(result)
+
 
 if __name__ == "__main__":
     _, server_config = read_config()
