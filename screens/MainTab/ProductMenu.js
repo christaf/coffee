@@ -5,11 +5,13 @@ import {useNavigation} from "@react-navigation/native";
 import {Button} from "react-native-paper";
 import {ProductStyles} from "../../Styles/ProductStyles";
 import Cart from "./Cart";
+import OrderableItem from "../../Elements/OrderableItem";
+import {useFavourites} from "../../contexts/FavouritesContext";
 
 const ProductMenu = () => {
     const [error, setError] = useState('');
     const [coffeeData, setCoffeeData] = useState([]);
-
+    const { addFavourite, removeFavourite, clearFavourite } = useFavourites();
     const fetchCoffees = async () => {
         const jsonData = {
             message: "get_coffees"
@@ -17,7 +19,7 @@ const ProductMenu = () => {
 
         try {
             console.log("Sending data");
-            const response = await fetch("http://192.168.0.105:5000/coffee_list", {
+            const response = await fetch("http://192.168.0.110:5000/coffee_list", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
@@ -58,11 +60,13 @@ const ProductMenu = () => {
 
     const navigation = useNavigation();
 
+    const handleAddFavourite = (item) => {
+        addFavourite(item);
+    }
+
     const renderItem = ({item}) => (
         <View style={ProductStyles.item}>
-            <Text>{item.name}</Text>
-            <Text>{item.bean_type}</Text>
-            <Text>{item.brewing_type}</Text>
+            <OrderableItem title={item.name} description={item.bean_type} handleAddFavourite={handleAddFavourite}></OrderableItem>
         </View>
     );
 

@@ -1,56 +1,52 @@
-import React, {useEffect, useState} from 'react';
-import {View, Text, FlatList} from 'react-native';
+import React, { useEffect } from 'react';
+import { View, Text, FlatList } from 'react-native';
+import { useFavourites } from '../../contexts/FavouritesContext';
 
 function Favourites() {
-    const [favorites, setFavorites] = useState([]);
-
-    const jsonData = {
-        message: "get_favourites"
-    }
+    const { favourites, addFavourite, setFavouritesContext } = useFavourites();
 
     useEffect(() => {
-        const fetchData = async  () =>
-            {
-                try {
-                    await fetchFavourites();
-                } catch (error) {
-                    console.error('Error fetching data:', error);
-                }
-            }
-        fetchData().then(r => console.log(r));
-    }, []);
-    const fetchFavourites = async () => {
-        try {
-            const response = await fetch('http://192.168.0.105:5000/favourites', {
-                method: "POST",
-                headers: {
-                    "Content-Type":"application/json"
-                },
-                body: JSON.stringify(jsonData)
+        const jsonData = {
+            message: 'get_favourites',
+        };
 
-            });
-            if (response.ok) {
-                const responseData = await response.json();
-                const parsedData = JSON.parse(responseData);
-                console.log("Parsed data:", parsedData)
-                setFavorites(parsedData);
+        const fetchFavourites = async () => {
+            try {
+                const response = await fetch('http://192.168.0.110:5000/favourites', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(jsonData),
+                });
+
+                if (response.ok) {
+                    const responseData = await response.json();
+                    const parsedData = JSON.parse(responseData);
+                    setFavouritesContext(parsedData);
+                }
+            } catch (error) {
+                console.error('Error fetching data:', error);
             }
-        } catch (error) {
-            console.error('Error fetching data:', error);
-        }
-    };
+        };
+
+        fetchFavourites();
+    }, []);
+
     return (
         <View>
             <FlatList
-                data={favorites}
-                renderItem={({item}) => (
+                data={favourites}
+                renderItem={({ item }) => (
                     <View>
-                        <Text>{item.name}</Text>
-                        <Text>{item.price}</Text>
-                    </View>)}
-                keyExtractor={item => item.id.toString()}
+                        <Text>{item.default_coffee}</Text>
+                        {/*<Text>{item.price}</Text>*/}
+                    </View>
+                )}
+                keyExtractor={(item) => item.default_coffee}
             />
-        </View>);
+        </View>
+    );
 }
 
 export default Favourites;
