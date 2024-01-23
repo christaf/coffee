@@ -1,9 +1,10 @@
-import React, { useEffect } from 'react';
-import { View, Text, FlatList } from 'react-native';
-import { useFavourites } from '../../contexts/FavouritesContext';
+import React, {useEffect} from 'react';
+import {View, Text, FlatList} from 'react-native';
+import {useFavourites} from '../../contexts/FavouritesContext';
+import InCartItem from "../../Elements/InCartItem";
 
 function Favourites() {
-    const { favourites, addFavourite, setFavouritesContext } = useFavourites();
+    const {favourites, addFavourite, setFavouritesContext} = useFavourites();
 
     useEffect(() => {
         const jsonData = {
@@ -37,10 +38,11 @@ function Favourites() {
         <View>
             <FlatList
                 data={favourites}
-                renderItem={({ item }) => (
+                renderItem={({item}) => (
                     <View>
-                        <Text>{item.default_coffee}</Text>
-                        {/*<Text>{item.price}</Text>*/}
+                        <InCartItem title={item.default_coffee} description={item.price}>
+
+                        </InCartItem>
                     </View>
                 )}
                 keyExtractor={(item) => item.default_coffee}
