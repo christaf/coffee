@@ -11,7 +11,7 @@ const Cart = () => {
 
     const data = [1,2,3];
     const checkout = () => {
-        //TODO jak to ma dzialac w ogole xD
+
     };
 
     return (

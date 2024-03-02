@@ -41,7 +41,7 @@ def get_coffee_list():
     content = request.json
     print(content)
     result = fetch_coffees()
-
+dzionselka
     return jsonify(result)
 
 

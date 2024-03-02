@@ -2,7 +2,7 @@ import {StyleSheet} from "react-native";
 
 export const loginStyles = StyleSheet.create({
     login_container: {
-        backgroundColor: 'grey',
+        backgroundColor: 'white',
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center'
@@ -30,7 +30,7 @@ export const loginStyles = StyleSheet.create({
         marginTop: 24,
     },
     buttonText: {
-        color: '#fff',
+        color: '#000',
         fontWeight: 'bold',
     },
 })

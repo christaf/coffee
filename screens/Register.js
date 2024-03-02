@@ -26,7 +26,8 @@ const RegisterScreen = ({navigation}) => {
                 console.log("Sending data");
                 // const response = await fetch("http://127.0.0.1:5000/login", { //#nie dziala
                 //const response = await fetch("http://192.168.0.108:5000/login", {
-                const response = await fetch("http://192.168.0.172:5000/register", {
+                //const response = await fetch("http://192.168.0.172:5000/register", {
+                const response = await fetch("http://172.20.10.7:5000/register", {
                     method: "POST",
                     headers: {
                         "Content-Type":"application/json"

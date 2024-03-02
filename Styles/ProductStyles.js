@@ -2,7 +2,7 @@ import {StyleSheet} from "react-native";
 
 export const ProductStyles = StyleSheet.create({
     productsScreen:{
-        backgroundColor: 'grey',
+        backgroundColor: 'white',
         flex: 5,
         padding: 5
     },

@@ -13,7 +13,7 @@ function Favourites() {
 
         const fetchFavourites = async () => {
             try {
-                const response = await fetch('http://192.168.0.110:5000/favourites', {
+                const response = await fetch('http://172.20.10.7:5000/favourites', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',

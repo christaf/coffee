@@ -82,7 +82,7 @@ const CubeThrower = () => {
     const determineDiscount = async velocity => {
         try {
 
-            const response = await fetch(`YOUR_BACKEND_API_URL?velocity=${velocity}`, {
+            const response = await fetch(`http://172.20.10.7:5000`, {
                 method: 'GET'
             });
             const discounts = await response.json();

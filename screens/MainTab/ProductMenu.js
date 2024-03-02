@@ -19,7 +19,7 @@ const ProductMenu = () => {
 
         try {
             console.log("Sending data");
-            const response = await fetch("http://192.168.0.110:5000/coffee_list", {
+            const response = await fetch("http://172.20.10.7:5000/coffee_list", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
